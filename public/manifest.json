@@ -1,0 +1,16 @@
+{
+  "name": "Impromptu Practice",
+  "short_name": "Impromptu",
+  "start_url": "/impromptu-topic-generator/",
+  "display": "standalone",
+  "background_color": "#fbfbfd",
+  "theme_color": "#1d1d1f",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
