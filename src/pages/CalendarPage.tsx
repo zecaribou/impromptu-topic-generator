@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import type { PracticeSession, PracticeRating } from '../types';
+import type { PracticeSession, PracticeRating, StreakData } from '../types';
 import { LoggerModal } from '../components/LoggerModal';
 import { Pencil } from 'lucide-react';
+import { calculateStreaks } from '../utils/streaks';
 
 export default function CalendarPage() {
   const [sessions, setSessions] = useLocalStorage<Record<string, PracticeSession>>('sessions', {});
+  const [, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
   const [selectedDay, setSelectedDay] = useState<PracticeSession | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [backfillDate, setBackfillDate] = useState<string | null>(null);
 
   const today = new Date();
   const currentMonth = today.getMonth();
@@ -32,8 +35,23 @@ export default function CalendarPage() {
     const newSessions = { ...sessions };
     newSessions[selectedDay.date] = { ...selectedDay, rating, note };
     setSessions(newSessions);
+    setStreak(calculateStreaks(newSessions));
     setSelectedDay(newSessions[selectedDay.date]);
     setIsEditing(false);
+  };
+
+  const handleBackfill = (rating: PracticeRating, note: string) => {
+    if (!backfillDate) return;
+    const newSessions = { ...sessions };
+    newSessions[backfillDate] = {
+      date: backfillDate,
+      topic: "Past Practice Check-in",
+      rating,
+      note
+    };
+    setSessions(newSessions);
+    setStreak(calculateStreaks(newSessions));
+    setBackfillDate(null);
   };
 
   return (
@@ -62,8 +80,11 @@ export default function CalendarPage() {
             return (
               <button
                 key={dateStr}
-                disabled={!isCompleted}
-                onClick={() => isCompleted && setSelectedDay(sessions[dateStr])}
+                disabled={!isCompleted && dateStr >= todayStr}
+                onClick={() => {
+                  if (isCompleted) setSelectedDay(sessions[dateStr]);
+                  else if (dateStr < todayStr) setBackfillDate(dateStr);
+                }}
                 className={`flex items-center justify-center p-2 rounded-md aspect-square transition-all
                   ${isCompleted ? 'bg-accent text-white' : 'bg-light text-muted'}
                   ${isToday && !isCompleted ? 'border' : ''}
@@ -109,6 +130,16 @@ export default function CalendarPage() {
           initialNote={selectedDay.note}
           onClose={() => setIsEditing(false)}
           onLog={handleEdit}
+        />
+      )}
+
+      {backfillDate && (
+        <LoggerModal
+          topic={`Log Practice for ${new Date(backfillDate + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`}
+          initialRating="Good"
+          initialNote=""
+          onClose={() => setBackfillDate(null)}
+          onLog={handleBackfill}
         />
       )}
     </div>

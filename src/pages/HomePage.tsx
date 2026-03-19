@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { PracticeSession, StreakData, PracticeRating } from '../types';
+import { calculateStreaks } from '../utils/streaks';
 import { IMPROMPTU_TOPICS } from '../data/topics';
 import { TopicCard } from '../components/TopicCard';
 import { Timer } from '../components/Timer';
@@ -34,23 +35,7 @@ export default function HomePage() {
     const newSessions = { ...sessions };
     newSessions[today] = { date: today, topic: todaysTopic, rating, note };
     setSessions(newSessions);
-    
-    let newCurrent = streak.current;
-    if (streak.lastDate !== today) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayStr = yesterday.toLocaleDateString('en-CA');
-      if (streak.lastDate === yesterdayStr) {
-        newCurrent += 1;
-      } else {
-        newCurrent = 1;
-      }
-    }
-    setStreak({
-      current: newCurrent,
-      longest: Math.max(streak.longest, newCurrent),
-      lastDate: today
-    });
+    setStreak(calculateStreaks(newSessions));
     setShowLogger(false);
   };
 
