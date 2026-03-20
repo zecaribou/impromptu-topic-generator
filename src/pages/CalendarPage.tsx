@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { PracticeSession, PracticeRating, StreakData } from '../types';
 import { LoggerModal } from '../components/LoggerModal';
-import { Pencil } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 import { calculateStreaks } from '../utils/streaks';
 
 export default function CalendarPage() {
@@ -52,6 +52,18 @@ export default function CalendarPage() {
     setSessions(newSessions);
     setStreak(calculateStreaks(newSessions));
     setBackfillDate(null);
+  };
+
+  const handleDelete = (dateStr: string) => {
+    if (!window.confirm('Are you sure you want to delete this log?')) return;
+    const newSessions = { ...sessions };
+    delete newSessions[dateStr];
+    setSessions(newSessions);
+    setStreak(calculateStreaks(newSessions));
+    if (selectedDay?.date === dateStr) {
+      setSelectedDay(null);
+    }
+    setIsEditing(false);
   };
 
   return (
@@ -110,7 +122,10 @@ export default function CalendarPage() {
             <div className="flex items-center gap-3">
               <span className="text-xs font-semibold px-3 py-1 bg-light rounded-full text-muted">{selectedDay.rating}</span>
               <button onClick={() => setIsEditing(true)} aria-label="Edit Session">
-                <Pencil size={16} className="text-muted" strokeWidth={2.5} />
+                <Pencil size={16} className="text-muted hover:text-main transition-colors" strokeWidth={2.5} />
+              </button>
+              <button onClick={() => handleDelete(selectedDay.date)} aria-label="Delete Session">
+                <Trash2 size={16} className="text-red-400 hover:text-red-600 transition-colors" strokeWidth={2.5} />
               </button>
             </div>
           </div>
