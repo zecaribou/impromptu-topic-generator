@@ -33,13 +33,14 @@ export default function ImpromptuPage() {
   const isCompletedToday = !!sessions[today];
 
   useEffect(() => {
+    // Only auto-generate if there's no topic at all (first load)
     if (!todaysTopic && !isCompletedToday) {
-      generateTopic();
+      generateTopic(selectedLang);
     }
-  }, [selectedLang]);
+  }, []);
 
-  const generateTopic = () => {
-    const topics = TOPIC_MAP[selectedLang];
+  const generateTopic = (lang: Language = selectedLang) => {
+    const topics = TOPIC_MAP[lang];
     const usedTopics = Object.values(sessions).map(s => s.topic);
     const available = topics.filter(t => !usedTopics.includes(t));
     const pool = available.length > 0 ? available : topics;
@@ -72,11 +73,11 @@ export default function ImpromptuPage() {
               key={lang}
               onClick={() => {
                 setSelectedLang(lang);
-                if (!isCompletedToday) generateTopic();
+                if (!isCompletedToday) generateTopic(lang);
               }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all border
                 ${selectedLang === lang 
-                  ? 'bg-main text-white border-main shadow-sm' 
+                  ? 'bg-accent text-white border-accent shadow-sm' 
                   : 'bg-white text-muted border-light hover:border-muted hover:text-main'}
               `}
             >
@@ -103,7 +104,7 @@ export default function ImpromptuPage() {
           </div>
         ) : (
           <div className="w-full flex flex-col items-center">
-            <button className="btn-primary w-full" style={{ maxWidth: '340px' }} onClick={generateTopic}>
+            <button className="btn-primary w-full" style={{ maxWidth: '340px' }} onClick={() => generateTopic()}>
               Generate Topic
             </button>
             <button className="text-muted mt-6 font-medium" onClick={() => setShowLogger(true)}>
