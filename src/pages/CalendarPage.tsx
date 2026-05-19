@@ -11,11 +11,13 @@ export default function CalendarPage() {
   const [selectedDay, setSelectedDay] = useState<PracticeSession | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [backfillDate, setBackfillDate] = useState<string | null>(null);
+  const [viewDate, setViewDate] = useState(new Date());
 
   const today = new Date();
-  const currentMonth = today.getMonth();
-  const currentYear = today.getFullYear();
   const todayStr = today.toLocaleDateString('en-CA');
+
+  const currentMonth = viewDate.getMonth();
+  const currentYear = viewDate.getFullYear();
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay(); // 0 is Sunday
@@ -29,6 +31,11 @@ export default function CalendarPage() {
     const d = new Date(currentYear, currentMonth, i);
     gridDays.push(d.toLocaleDateString('en-CA'));
   }
+
+  const changeMonth = (offset: number) => {
+    const newDate = new Date(currentYear, currentMonth + offset, 1);
+    setViewDate(newDate);
+  };
 
   const handleEdit = (rating: PracticeRating, note: string) => {
     if (!selectedDay) return;
@@ -71,9 +78,17 @@ export default function CalendarPage() {
       <h1 className="text-xl font-semibold mb-8">Calendar</h1>
       
       <div className="bg-white rounded-3xl p-6 shadow-sm border">
-        <h2 className="text-sm font-semibold mb-6 text-center text-main uppercase tracking-wide">
-          {today.toLocaleString('default', { month: 'long', year: 'numeric' })}
-        </h2>
+        <div className="flex justify-between items-center mb-6">
+          <button onClick={() => changeMonth(-1)} className="p-2 hover:bg-light rounded-full transition-colors">
+            <span className="text-xl">&larr;</span>
+          </button>
+          <h2 className="text-sm font-semibold text-center text-main uppercase tracking-wide">
+            {viewDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+          </h2>
+          <button onClick={() => changeMonth(1)} className="p-2 hover:bg-light rounded-full transition-colors">
+            <span className="text-xl">&rarr;</span>
+          </button>
+        </div>
         
         <div className="grid grid-cols-7 gap-2 mb-2">
           {weekdays.map((wd, i) => (
@@ -88,24 +103,25 @@ export default function CalendarPage() {
             const isCompleted = !!sessions[dateStr];
             const isToday = dateStr === todayStr;
             const isSelected = selectedDay?.date === dateStr;
+            const isFuture = dateStr > todayStr;
             
             return (
               <button
                 key={dateStr}
-                disabled={!isCompleted && dateStr >= todayStr}
+                disabled={!isCompleted && isFuture}
                 onClick={() => {
                   if (isCompleted) setSelectedDay(sessions[dateStr]);
-                  else if (dateStr < todayStr) setBackfillDate(dateStr);
+                  else if (!isFuture) setBackfillDate(dateStr);
                 }}
                 className={`flex items-center justify-center p-2 rounded-md aspect-square transition-all
                   ${isCompleted ? 'bg-accent text-white' : 'bg-light text-muted'}
-                  ${isToday && !isCompleted ? 'border' : ''}
-                  ${isSelected ? 'opacity-80 scale-95' : ''}
+                  ${isToday && !isCompleted ? 'border border-main' : ''}
+                  ${isFuture ? 'opacity-30' : ''}
+                  ${isSelected ? 'opacity-80 scale-95 ring-2 ring-accent ring-offset-1' : ''}
                 `}
-                style={{ borderWidth: isToday && !isCompleted ? '1px' : '0' }}
               >
                 <span className={`text-sm font-medium ${isCompleted ? 'text-white' : 'text-muted'}`}>
-                  {new Date(dateStr).getDate()}
+                  {new Date(dateStr + 'T12:00:00').getDate()}
                 </span>
               </button>
             );
@@ -117,7 +133,7 @@ export default function CalendarPage() {
         <div className="mt-8 p-6 bg-white rounded-3xl shadow-sm border animate-fade-in relative">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wide">
-              {new Date(selectedDay.date).toLocaleDateString(undefined, { weekday: 'short', month: 'long', day: 'numeric' })}
+              {new Date(selectedDay.date + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'short', month: 'long', day: 'numeric' })}
             </h3>
             <div className="flex items-center gap-3">
               <span className="text-xs font-semibold px-3 py-1 bg-light rounded-full text-muted">{selectedDay.rating}</span>

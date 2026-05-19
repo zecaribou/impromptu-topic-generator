@@ -8,8 +8,11 @@ export default function HomePage() {
     <div className="animate-fade-in hero-section">
       <div className="flex flex-col items-center w-full">
         <h1 className="hero-title">
-          Master your speaking.
+          Practice thinking out loud.
         </h1>
+        <p className="hero-subtitle text-center text-muted max-w-[340px] mt-4">
+          Become a clearer, more confident communicator with a daily environment built for speaking mastery.
+        </p>
         <div className="hero-quote-container">
           <p className="hero-quote">
             “Great speakers are not born, they're trained.”

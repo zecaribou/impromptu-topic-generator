@@ -100,3 +100,48 @@ export const IMPROMPTU_TOPICS: string[] = [
   "The importance of self-compassion.",
   "How to leave a positive legacy."
 ];
+export const MANDARIN_TOPICS: string[] = [
+  "我从失败中学到的最有价值的教训。",
+  "为什么我们应该重新审视标准教育。",
+  "一本真正改变了我看法的书。",
+  "我经历过的最不寻常的对话。",
+  "如果人类不需要睡觉会怎样？",
+  "向先天失明的人解释什么是蓝色。",
+  "描述一项当今世界需要的发明。",
+  "如果每天多出一个小时，你会做什么？",
+  "我们是否太依赖技术了？",
+  "我收到的最好的建议。",
+  "如果你可以生活在任何时代，你会选择哪一个？",
+  "通才和专才哪个更好？",
+  "我犯过的一个让我感激的错误。",
+  "无聊在现代世界中的重要性。",
+  "什么是好朋友？",
+  "旅行如何改变我们的视角。",
+  "我做过的最具挑战性的事情。",
+  "社交媒体应该有年龄限制吗？",
+  "如果我明天中了彩票，我会做什么。",
+  "塑造了我的童年记忆。"
+];
+
+export const FRENCH_TOPICS: string[] = [
+  "La leçon la plus précieuse que j'ai apprise d'un échec.",
+  "Pourquoi nous devrions repenser l'éducation standard.",
+  "Un livre qui a véritablement changé ma perspective.",
+  "La conversation la plus inhabituelle que j'aie jamais eue.",
+  "Et si les humains n'avaient pas besoin de dormir ?",
+  "Expliquer la couleur bleue à une personne aveugle de naissance.",
+  "Décrire une invention dont le monde a besoin en ce moment.",
+  "Que feriez-vous avec une heure supplémentaire chaque jour ?",
+  "Sommes-nous trop dépendants de la technologie ?",
+  "Le meilleur conseil que j'ai jamais reçu.",
+  "Si vous pouviez vivre à n'importe quelle époque, laquelle choisiriez-vous ?",
+  "Vaut-il mieux être généraliste ou spécialiste ?",
+  "Une erreur que j'ai commise et dont je suis reconnaissant.",
+  "L'importance de l'ennui dans le monde moderne.",
+  "Qu'est-ce qui fait un bon ami ?",
+  "Comment le voyage change notre perspective.",
+  "La chose la plus difficile que j'aie jamais faite.",
+  "Les réseaux sociaux devraient-ils avoir des restrictions d'âge ?",
+  "Ce que je ferais si je gagnais à la loterie demain.",
+  "Un souvenir d'enfance qui a façonné qui je suis."
+];
