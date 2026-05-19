@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import type { PracticeSession, StreakData, PracticeRating } from '../types';
+import type { PracticeSession, StreakData, PracticeRating, SessionsData, LanguageCode } from '../types';
 import { calculateStreaks } from '../utils/streaks';
 import { IMPROMPTU_TOPICS, MANDARIN_TOPICS, FRENCH_TOPICS } from '../data/topics';
 import { TopicCard } from '../components/TopicCard';
@@ -8,40 +8,72 @@ import { Timer } from '../components/Timer';
 import { LoggerModal } from '../components/LoggerModal';
 import { Globe } from 'lucide-react';
 
-type Language = 'en' | 'cn' | 'fr';
-
-const TOPIC_MAP: Record<Language, string[]> = {
+const TOPIC_MAP: Record<LanguageCode, string[]> = {
   en: IMPROMPTU_TOPICS,
   cn: MANDARIN_TOPICS,
   fr: FRENCH_TOPICS
 };
 
-const LANGUAGE_LABELS: Record<Language, string> = {
+const LANGUAGE_LABELS: Record<LanguageCode, string> = {
   en: 'English',
   cn: 'Mandarin',
   fr: 'French'
 };
 
 export default function ImpromptuPage() {
-  const [sessions, setSessions] = useLocalStorage<Record<string, PracticeSession>>('sessions', {});
+  const [sessions, setSessions] = useLocalStorage<SessionsData>('sessions', {});
   const [streak, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
   const [todaysTopic, setTodaysTopic] = useLocalStorage<string | null>('todaysTopic', null);
-  const [selectedLang, setSelectedLang] = useLocalStorage<Language>('selectedLanguage', 'en');
+  const [selectedLang, setSelectedLang] = useLocalStorage<LanguageCode>('selectedLanguage', 'en');
   const [showLogger, setShowLogger] = useState(false);
 
   const today = new Date().toLocaleDateString('en-CA');
-  const isCompletedToday = !!sessions[today];
+  const isCompletedTodayInLang = !!(sessions[today] && sessions[today][selectedLang]);
 
+  // Migration logic
   useEffect(() => {
-    // Only auto-generate if there's no topic at all (first load)
-    if (!todaysTopic && !isCompletedToday) {
-      generateTopic(selectedLang);
+    const rawSessions = localStorage.getItem('sessions');
+    if (rawSessions) {
+      try {
+        const parsed = JSON.parse(rawSessions);
+        // Check if old format: Record<string, { date, topic, rating, note }>
+        const firstKey = Object.keys(parsed)[0];
+        if (firstKey && parsed[firstKey].topic && !parsed[firstKey].en && !parsed[firstKey].cn && !parsed[firstKey].fr) {
+          const migrated: SessionsData = {};
+          Object.keys(parsed).forEach(date => {
+            migrated[date] = {
+              en: { 
+                ...parsed[date], 
+                language: 'en', 
+                completedAt: parsed[date].completedAt || new Date(date).toISOString() 
+              }
+            };
+          });
+          setSessions(migrated);
+          setStreak(calculateStreaks(migrated));
+        }
+      } catch (e) {
+        console.error("Migration failed", e);
+      }
     }
   }, []);
 
-  const generateTopic = (lang: Language = selectedLang) => {
+  useEffect(() => {
+    if (!todaysTopic && !isCompletedTodayInLang) {
+      generateTopic(selectedLang);
+    }
+  }, [selectedLang]);
+
+  const generateTopic = (lang: LanguageCode = selectedLang) => {
     const topics = TOPIC_MAP[lang];
-    const usedTopics = Object.values(sessions).map(s => s.topic);
+    // Flat used topics list across all sessions and languages
+    const usedTopics: string[] = [];
+    Object.values(sessions).forEach(dayLogs => {
+      Object.values(dayLogs).forEach(log => {
+        if (log?.topic) usedTopics.push(log.topic);
+      });
+    });
+
     const available = topics.filter(t => !usedTopics.includes(t));
     const pool = available.length > 0 ? available : topics;
     const randomTopic = pool[Math.floor(Math.random() * pool.length)];
@@ -51,7 +83,17 @@ export default function ImpromptuPage() {
   const handleLog = (rating: PracticeRating, note: string) => {
     if (!todaysTopic) return;
     const newSessions = { ...sessions };
-    newSessions[today] = { date: today, topic: todaysTopic, rating, note };
+    if (!newSessions[today]) newSessions[today] = {};
+    
+    newSessions[today][selectedLang] = { 
+      date: today, 
+      topic: todaysTopic, 
+      rating, 
+      note,
+      language: selectedLang,
+      completedAt: new Date().toISOString()
+    };
+    
     setSessions(newSessions);
     setStreak(calculateStreaks(newSessions));
     setShowLogger(false);
@@ -68,12 +110,12 @@ export default function ImpromptuPage() {
         </div>
 
         <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-1 px-1">
-          {(Object.keys(TOPIC_MAP) as Language[]).map((lang) => (
+          {(Object.keys(TOPIC_MAP) as LanguageCode[]).map((lang) => (
             <button
               key={lang}
               onClick={() => {
                 setSelectedLang(lang);
-                if (!isCompletedToday) generateTopic(lang);
+                if (!sessions[today]?.[lang]) generateTopic(lang);
               }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all border
                 ${selectedLang === lang 
@@ -88,15 +130,15 @@ export default function ImpromptuPage() {
         </div>
       </div>
 
-      <TopicCard topic={isCompletedToday ? sessions[today].topic : (todaysTopic || '')} />
+      <TopicCard topic={isCompletedTodayInLang ? (sessions[today]?.[selectedLang]?.topic || '') : (todaysTopic || '')} />
 
       <Timer />
 
       <div className="flex flex-col items-center mt-8 px-4 w-full">
-        {isCompletedToday ? (
+        {isCompletedTodayInLang ? (
           <div className="w-full flex flex-col items-center">
             <p className="text-center text-muted font-medium py-4">
-              Practice completed today
+              {LANGUAGE_LABELS[selectedLang]} practice completed today
             </p>
             <button className="text-sm font-semibold text-main" onClick={() => setShowLogger(true)}>
               Edit Session
@@ -114,11 +156,11 @@ export default function ImpromptuPage() {
         )}
       </div>
 
-      {showLogger && (todaysTopic || isCompletedToday) && (
+      {showLogger && (todaysTopic || isCompletedTodayInLang) && (
         <LoggerModal 
-          topic={isCompletedToday ? sessions[today].topic : (todaysTopic as string)} 
-          initialRating={isCompletedToday ? sessions[today].rating : 'Good'}
-          initialNote={isCompletedToday ? sessions[today].note : ''}
+          topic={isCompletedTodayInLang ? (sessions[today]?.[selectedLang]?.topic || '') : (todaysTopic as string)} 
+          initialRating={isCompletedTodayInLang ? (sessions[today]?.[selectedLang]?.rating || 'Good') : 'Good'}
+          initialNote={isCompletedTodayInLang ? (sessions[today]?.[selectedLang]?.note || '') : ''}
           onClose={() => setShowLogger(false)} 
           onLog={handleLog} 
         />
