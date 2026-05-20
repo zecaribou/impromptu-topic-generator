@@ -13,10 +13,9 @@ const LANGUAGE_CONFIG: Record<string, { label: string; color: string; short: str
 
 export default function CalendarPage() {
   const [sessions, setSessions] = useLocalStorage<any>('sessions', {});
-  const [streak, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
+  const [, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [editingLang, setEditingLang] = useState<LanguageCode | null>(null);
-  const [backfillDate, setBackfillDate] = useState<string | null>(null);
   const [viewDate, setViewDate] = useState(() => new Date());
 
   // Migration logic
@@ -145,10 +144,9 @@ export default function CalendarPage() {
                 <button
                   key={dateStr}
                   disabled={completedLangs.length === 0 && isFuture}
-                  onClick={() => {
-                    if (completedLangs.length > 0) setSelectedDate(dateStr);
-                    else if (!isFuture) setBackfillDate(dateStr);
-                  }}
+                onClick={() => {
+                  if (completedLangs.length > 0) setSelectedDate(dateStr);
+                }}
                   className={`flex flex-col items-center justify-between p-2 rounded-xl aspect-square transition-all relative border-2 
                     ${completedLangs.length > 0 ? 'bg-light border-transparent' : 'bg-transparent border-transparent'}
                     ${isToday ? 'border-accent' : ''}
