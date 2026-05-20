@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import type { SessionsData, PracticeRating, StreakData, LanguageCode, PracticeSession } from '../types';
+import type { SessionsData, PracticeRating, StreakData, LanguageCode } from '../types';
 import { LoggerModal } from '../components/LoggerModal';
 import { Pencil, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { calculateStreaks } from '../utils/streaks';

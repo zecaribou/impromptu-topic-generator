@@ -1,4 +1,4 @@
-import type { PracticeSession, StreakData, SessionsData, LanguageCode } from '../types';
+import type { StreakData, SessionsData, LanguageCode } from '../types';
 
 function parseDateStr(str: string) {
   const [y, m, d] = str.split('-');
