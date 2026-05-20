@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { SessionsData, PracticeRating, StreakData, LanguageCode } from '../types';
 import { LoggerModal } from '../components/LoggerModal';
@@ -13,11 +13,37 @@ const LANGUAGE_CONFIG: Record<LanguageCode, { label: string; color: string; shor
 
 export default function CalendarPage() {
   const [sessions, setSessions] = useLocalStorage<SessionsData>('sessions', {});
-  const [, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
+  const [streak, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [editingLang, setEditingLang] = useState<LanguageCode | null>(null);
   const [backfillDate, setBackfillDate] = useState<string | null>(null);
   const [viewDate, setViewDate] = useState(new Date());
+
+  // Migration logic - ensure old data format is converted to new nested format
+  useEffect(() => {
+    if (!sessions || Object.keys(sessions).length === 0) return;
+    
+    const firstKey = Object.keys(sessions)[0];
+    const firstVal = sessions[firstKey] as any;
+    
+    // Detect old format: Record<string, { topic, rating, etc }> 
+    // instead of Record<string, Record<LanguageCode, Session>>
+    if (firstVal && firstVal.topic && !firstVal.en && !firstVal.cn && !firstVal.fr) {
+      const migrated: SessionsData = {};
+      Object.keys(sessions).forEach(date => {
+        const oldSession = sessions[date] as any;
+        migrated[date] = {
+          en: { 
+            ...oldSession, 
+            language: 'en', 
+            completedAt: oldSession.completedAt || new Date(date).toISOString() 
+          }
+        };
+      });
+      setSessions(migrated);
+      setStreak(calculateStreaks(migrated));
+    }
+  }, []);
 
   const today = new Date();
   const todayStr = today.toLocaleDateString('en-CA');
