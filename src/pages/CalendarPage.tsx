@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { SessionsData, PracticeRating, StreakData, LanguageCode } from '../types';
 import { LoggerModal } from '../components/LoggerModal';
-import { Pencil, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Pencil, Trash2, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
 import { calculateStreaks } from '../utils/streaks';
 
 const LANGUAGE_CONFIG: Record<LanguageCode, { label: string; color: string; short: string }> = {
@@ -12,114 +12,126 @@ const LANGUAGE_CONFIG: Record<LanguageCode, { label: string; color: string; shor
 };
 
 export default function CalendarPage() {
-  const [sessions, setSessions] = useLocalStorage<SessionsData>('sessions', {});
+  const [sessions, setSessions] = useLocalStorage<any>('sessions', {});
   const [streak, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [editingLang, setEditingLang] = useState<LanguageCode | null>(null);
   const [backfillDate, setBackfillDate] = useState<string | null>(null);
-  const [viewDate, setViewDate] = useState(new Date());
+  const [viewDate, setViewDate] = useState(() => new Date());
+  const [hasError, setHasError] = useState(false);
 
-  // Migration logic - ensure old data format is converted to new nested format
+  // Migration and Data Cleanup
   useEffect(() => {
-    if (!sessions || Object.keys(sessions).length === 0) return;
-    
-    const firstKey = Object.keys(sessions)[0];
-    const firstVal = sessions[firstKey] as any;
-    
-    // Detect old format: Record<string, { topic, rating, etc }> 
-    // instead of Record<string, Record<LanguageCode, Session>>
-    if (firstVal && firstVal.topic && !firstVal.en && !firstVal.cn && !firstVal.fr) {
-      const migrated: SessionsData = {};
-      Object.keys(sessions).forEach(date => {
-        const oldSession = sessions[date] as any;
-        migrated[date] = {
-          en: { 
-            ...oldSession, 
-            language: 'en', 
-            completedAt: oldSession.completedAt || new Date(date).toISOString() 
+    try {
+      if (!sessions) return;
+      
+      let needsUpdate = false;
+      let migrated: SessionsData = {};
+
+      // Case 1: sessions is an array (very old legacy)
+      if (Array.isArray(sessions)) {
+        needsUpdate = true;
+        sessions.forEach((s: any) => {
+          if (s && s.date) {
+            if (!migrated[s.date]) migrated[s.date] = {};
+            migrated[s.date].en = { ...s, language: 'en', completedAt: s.completedAt || new Date(s.date).toISOString() };
           }
-        };
-      });
-      setSessions(migrated);
-      setStreak(calculateStreaks(migrated));
+        });
+      } 
+      // Case 2: sessions is a record but in the old non-nested format
+      else if (typeof sessions === 'object') {
+        const keys = Object.keys(sessions);
+        if (keys.length > 0) {
+          const firstVal = sessions[keys[0]];
+          // Check if first value has 'topic' directly (old format)
+          if (firstVal && firstVal.topic && !firstVal.en && !firstVal.cn && !firstVal.fr) {
+            needsUpdate = true;
+            keys.forEach(date => {
+              const oldSession = sessions[date];
+              migrated[date] = {
+                en: { 
+                  ...oldSession, 
+                  language: 'en', 
+                  completedAt: oldSession.completedAt || new Date(date).toISOString() 
+                }
+              };
+            });
+          }
+        }
+      }
+
+      if (needsUpdate) {
+        console.log("Migrating sessions data...");
+        setSessions(migrated);
+        setStreak(calculateStreaks(migrated));
+      }
+    } catch (e) {
+      console.error("Migration failed", e);
     }
   }, []);
 
-  const today = new Date();
-  const todayStr = today.toLocaleDateString('en-CA');
+  // Safe Grid Calculation
+  const calendarData = useMemo(() => {
+    try {
+      const year = viewDate.getFullYear();
+      const month = viewDate.getMonth();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const firstDay = new Date(year, month, 1).getDay();
+      const startOffset = (firstDay + 6) % 7; // Monday start
+      
+      const grid = [];
+      for (let i = 0; i < startOffset; i++) grid.push(null);
+      for (let i = 1; i <= daysInMonth; i++) {
+        grid.push(new Date(year, month, i).toLocaleDateString('en-CA'));
+      }
+      return grid;
+    } catch (e) {
+      setHasError(true);
+      return [];
+    }
+  }, [viewDate]);
 
-  const currentMonth = viewDate.getMonth();
-  const currentYear = viewDate.getFullYear();
-
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay(); // 0 is Sunday
-  const startOffset = (firstDayOfWeek + 6) % 7; // shift to Monday start
-
-  const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
-  const gridDays = [];
-  for (let i = 0; i < startOffset; i++) gridDays.push(null);
-  for (let i = 1; i <= daysInMonth; i++) {
-    const d = new Date(currentYear, currentMonth, i);
-    gridDays.push(d.toLocaleDateString('en-CA'));
+  if (hasError) {
+    return (
+      <div className="flex flex-col items-center justify-center p-12 text-center">
+        <AlertCircle size={48} className="text-red-400 mb-4" />
+        <h2 className="text-xl font-bold mb-2">Calendar Error</h2>
+        <p className="text-muted mb-6">We encountered an issue loading your history. Clearing your browser cache may help.</p>
+        <button onClick={() => window.location.reload()} className="btn-primary px-8">Reload App</button>
+      </div>
+    );
   }
 
+  const todayStr = new Date().toLocaleDateString('en-CA');
+  const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
   const changeMonth = (offset: number) => {
-    const newDate = new Date(currentYear, currentMonth + offset, 1);
-    setViewDate(newDate);
+    setViewDate(prev => new Date(prev.getFullYear(), prev.getMonth() + offset, 1));
   };
 
   const handleEdit = (rating: PracticeRating, note: string) => {
     if (!selectedDate || !editingLang) return;
     const newSessions = { ...sessions };
-    if (!newSessions[selectedDate]) return;
+    if (!newSessions[selectedDate]?.[editingLang]) return;
     
-    const existing = newSessions[selectedDate][editingLang];
-    if (existing) {
-      newSessions[selectedDate][editingLang] = { ...existing, rating, note };
-      setSessions(newSessions);
-      setStreak(calculateStreaks(newSessions));
-    }
+    newSessions[selectedDate][editingLang] = { ...newSessions[selectedDate][editingLang], rating, note };
+    setSessions(newSessions);
+    setStreak(calculateStreaks(newSessions));
     setEditingLang(null);
   };
 
-  const handleBackfill = (rating: PracticeRating, note: string) => {
-    if (!backfillDate) return;
-    const newSessions = { ...sessions };
-    if (!newSessions[backfillDate]) newSessions[backfillDate] = {};
-    
-    // Default backfill to English if not specified, 
-    // but better would be to have a lang selector in backfill.
-    // For now we use the first available lang that isn't logged.
-    const langToLog: LanguageCode = 'en'; 
-    
-    newSessions[backfillDate][langToLog] = {
-      date: backfillDate,
-      topic: "Past Practice Check-in",
-      rating,
-      note,
-      language: langToLog,
-      completedAt: new Date().toISOString()
-    };
-    setSessions(newSessions);
-    setStreak(calculateStreaks(newSessions));
-    setBackfillDate(null);
-  };
-
   const handleDelete = (dateStr: string, lang: LanguageCode) => {
-    if (!window.confirm(`Delete ${LANGUAGE_CONFIG[lang].label} log for this day?`)) return;
+    if (!window.confirm(`Delete ${LANGUAGE_CONFIG[lang].label} log?`)) return;
     const newSessions = { ...sessions };
     if (newSessions[dateStr]) {
       delete newSessions[dateStr][lang];
-      if (Object.keys(newSessions[dateStr]).length === 0) {
-        delete newSessions[dateStr];
-      }
+      if (Object.keys(newSessions[dateStr]).length === 0) delete newSessions[dateStr];
+      setSessions(newSessions);
+      setStreak(calculateStreaks(newSessions));
     }
-    setSessions(newSessions);
-    setStreak(calculateStreaks(newSessions));
   };
 
-  const selectedDayLogs = selectedDate ? sessions[selectedDate] : null;
+  const selectedDayLogs = selectedDate && sessions ? sessions[selectedDate] : null;
 
   return (
     <div className="animate-fade-in pt-4 pb-8">
@@ -155,11 +167,11 @@ export default function CalendarPage() {
         </div>
         
         <div className="grid grid-cols-7 gap-2">
-          {gridDays.map((dateStr, i) => {
+          {calendarData.map((dateStr, i) => {
             if (!dateStr) return <div key={i} />;
             
-            const daySessions = sessions[dateStr] || {};
-            const completedLangs = Object.keys(daySessions) as LanguageCode[];
+            const daySessions = (sessions && typeof sessions === 'object' ? sessions[dateStr] : {}) || {};
+            const completedLangs = (Object.keys(daySessions) as LanguageCode[]).filter(l => LANGUAGE_CONFIG[l]);
             const isCompleted = completedLangs.length > 0;
             const isToday = dateStr === todayStr;
             const isSelected = selectedDate === dateStr;
@@ -176,13 +188,14 @@ export default function CalendarPage() {
                 className={`flex flex-col items-center justify-between p-2 rounded-xl aspect-square transition-all relative
                   ${isCompleted ? 'bg-light' : 'bg-transparent'}
                   ${isToday ? 'border-2 border-accent' : 'border border-transparent'}
-                  ${!isCompleted && !isFuture ? 'bg-accent-light/30' : ''}
+                  ${!isCompleted && !isFuture ? 'bg-accent-light/10' : ''}
                   ${isFuture ? 'opacity-30' : ''}
                   ${isSelected ? 'ring-2 ring-accent ring-inset' : ''}
+                  active:scale-95
                 `}
               >
                 <span className={`text-sm font-semibold ${isCompleted ? 'text-main' : 'text-muted'}`}>
-                  {new Date(dateStr + 'T12:00:00').getDate()}
+                  {dateStr.split('-')[2]}
                 </span>
                 
                 <div className="flex gap-0.5 mt-auto">
@@ -200,19 +213,20 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {selectedDate && selectedDayLogs && (
+      {selectedDate && selectedDayLogs && typeof selectedDayLogs === 'object' && (
         <div className="mt-8 space-y-4 animate-fade-in">
           <div className="flex justify-between items-center px-4">
-            <h2 className="text-sm font-semibold text-muted uppercase tracking-widest">
+            <h2 className="text-xs font-bold text-muted uppercase tracking-widest">
               {new Date(selectedDate + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'short', month: 'long', day: 'numeric' })}
             </h2>
             <button onClick={() => setSelectedDate(null)} className="text-xs font-bold text-accent">Close</button>
           </div>
 
-          {(Object.entries(LANGUAGE_CONFIG) as [LanguageCode, any][]).map(([langCode, cfg]) => {
+          {(Object.keys(LANGUAGE_CONFIG) as LanguageCode[]).map((langCode) => {
             const log = selectedDayLogs[langCode];
+            const cfg = LANGUAGE_CONFIG[langCode];
             return (
-              <div key={langCode} className={`p-6 bg-white rounded-3xl shadow-sm border transition-opacity ${!log ? 'opacity-40 grayscale' : ''}`}>
+              <div key={langCode} className={`p-6 bg-white rounded-3xl shadow-sm border transition-opacity ${!log ? 'opacity-40 grayscale-[0.5]' : ''}`}>
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cfg.color }} />
@@ -223,10 +237,7 @@ export default function CalendarPage() {
                       <span className="text-[10px] font-bold px-2.5 py-1 bg-light rounded-full text-muted uppercase tracking-wider">
                         {log.rating}
                       </span>
-                      <button onClick={() => {
-                        setEditingLang(langCode);
-                        // Open Edit modal logic
-                      }} aria-label="Edit Session">
+                      <button onClick={() => setEditingLang(langCode)} aria-label="Edit Session">
                         <Pencil size={15} className="text-muted hover:text-main transition-colors" />
                       </button>
                       <button onClick={() => handleDelete(selectedDate, langCode)} aria-label="Delete Session">
@@ -270,7 +281,21 @@ export default function CalendarPage() {
           initialRating="Good"
           initialNote=""
           onClose={() => setBackfillDate(null)}
-          onLog={handleBackfill}
+          onLog={(rating, note) => {
+            const newSessions = { ...sessions };
+            if (!newSessions[backfillDate]) newSessions[backfillDate] = {};
+            newSessions[backfillDate].en = {
+              date: backfillDate,
+              topic: "Past Practice",
+              rating,
+              note,
+              language: 'en',
+              completedAt: new Date().toISOString()
+            };
+            setSessions(newSessions);
+            setStreak(calculateStreaks(newSessions));
+            setBackfillDate(null);
+          }}
         />
       )}
     </div>
