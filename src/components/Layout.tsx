@@ -1,13 +1,20 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Mic2, Calendar, BarChart2 } from 'lucide-react';
 
 export function Layout() {
+  const location = useLocation();
+  const isPractice = location.pathname.startsWith('/practice/');
+  const isHome = location.pathname === '/';
+
   return (
     <div className="flex-col w-full min-h-screen">
       <header className="top-nav">
         <NavLink to="/" className="brand-logo">SpeechLab</NavLink>
         <nav className="nav-links">
-          <NavLink to="/impromptu" className={({ isActive }) => `nav-link flex items-center gap-1.5 ${isActive ? 'active' : ''}`}>
+          <NavLink 
+            to="/" 
+            className={`nav-link flex items-center gap-1.5 ${(isHome || isPractice) ? 'active' : ''}`}
+          >
             <Mic2 size={16} /> <span className="hide-mobile">Impromptu</span>
           </NavLink>
           <NavLink to="/calendar" className={({ isActive }) => `nav-link flex items-center gap-1.5 ${isActive ? 'active' : ''}`}>
