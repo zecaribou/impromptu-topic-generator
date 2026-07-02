@@ -1,17 +1,21 @@
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import type { PracticeSession, StreakData } from '../types';
+import type { StreakData, SessionsData } from '../types';
 
 export default function InsightsPage() {
-  const [sessions] = useLocalStorage<Record<string, PracticeSession>>('sessions', {});
+  const [sessions] = useLocalStorage<SessionsData>('sessions', {});
   const [streak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
 
-  const totalSessions = Object.keys(sessions).length;
+  // Sum all language sessions across all days
+  const totalSessions = Object.values(sessions).reduce((acc, dayLogs) => {
+    return acc + (dayLogs ? Object.keys(dayLogs).length : 0);
+  }, 0);
   
   let completedLast30 = 0;
   for (let i = 0; i < 30; i++) {
     const d = new Date();
     d.setDate(d.getDate() - i);
-    if (sessions[d.toLocaleDateString('en-CA')]) {
+    const dayLogs = sessions[d.toLocaleDateString('en-CA')];
+    if (dayLogs && Object.keys(dayLogs).length > 0) {
       completedLast30++;
     }
   }

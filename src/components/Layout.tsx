@@ -3,7 +3,6 @@ import { Mic2, Calendar, BarChart2 } from 'lucide-react';
 
 export function Layout() {
   const location = useLocation();
-  const isPractice = location.pathname.startsWith('/practice/');
   const isHome = location.pathname === '/';
 
   return (
@@ -13,7 +12,7 @@ export function Layout() {
         <nav className="nav-links">
           <NavLink 
             to="/" 
-            className={`nav-link flex items-center gap-1.5 ${(isHome || isPractice) ? 'active' : ''}`}
+            className={`nav-link flex items-center gap-1.5 ${isHome ? 'active' : ''}`}
           >
             <Mic2 size={16} /> <span className="hide-mobile">Impromptu</span>
           </NavLink>

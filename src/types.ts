@@ -1,5 +1,7 @@
-export type LanguageCode = 'en' | 'cn' | 'fr';
+export type LanguageCode = 'en' | 'cn' | 'fr' | 'es';
 export type PracticeRating = 'Good' | 'Okay' | 'Struggled';
+export type ModeCode = 'casual' | 'work';
+export type DifficultyCode = 'easy' | 'medium' | 'hard';
 
 export interface PracticeSession {
   date: string; // YYYY-MM-DD
@@ -8,6 +10,8 @@ export interface PracticeSession {
   note?: string;
   language: LanguageCode;
   completedAt: string;
+  mode?: ModeCode;
+  difficulty?: DifficultyCode;
 }
 
 export type SessionsData = Record<string, Partial<Record<LanguageCode, PracticeSession>>>;

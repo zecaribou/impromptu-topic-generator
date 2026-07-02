@@ -69,12 +69,13 @@ export function calculateStreaks(sessions: SessionsData): StreakData {
   const perLanguage: Record<LanguageCode, { current: number; longest: number }> = {
     en: { current: 0, longest: 0 },
     cn: { current: 0, longest: 0 },
-    fr: { current: 0, longest: 0 }
+    fr: { current: 0, longest: 0 },
+    es: { current: 0, longest: 0 }
   };
 
-  const languages: LanguageCode[] = ['en', 'cn', 'fr'];
+  const languages: LanguageCode[] = ['en', 'cn', 'fr', 'es'];
   languages.forEach(lang => {
-    const langDates = allDates.filter(date => sessions[date][lang]);
+    const langDates = allDates.filter(date => sessions[date] && sessions[date][lang]);
     perLanguage[lang] = calculateBasicStreak(langDates);
   });
 

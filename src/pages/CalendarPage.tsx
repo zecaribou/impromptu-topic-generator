@@ -8,6 +8,7 @@ import { calculateStreaks } from '../utils/streaks';
 const LANGUAGE_CONFIG: Record<string, { label: string; color: string; short: string }> = {
   en: { label: 'English', color: '#007AFF', short: 'EN' },
   cn: { label: '中文', color: '#FF9500', short: '中' },
+  es: { label: 'Español', color: '#FF3B30', short: 'ES' },
   fr: { label: 'Français', color: '#5856D6', short: 'FR' }
 };
 
@@ -39,7 +40,7 @@ export default function CalendarPage() {
         const keys = Object.keys(sessions);
         if (keys.length > 0) {
           const firstVal = sessions[keys[0]];
-          if (firstVal && firstVal.topic && !firstVal.en && !firstVal.cn && !firstVal.fr) {
+          if (firstVal && firstVal.topic && !firstVal.en && !firstVal.cn && !firstVal.fr && !firstVal.es) {
             needsUpdate = true;
             keys.forEach(date => {
               const old = sessions[date];
