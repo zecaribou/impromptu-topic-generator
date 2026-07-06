@@ -29,8 +29,8 @@ export function Timer() {
   const isOver = seconds >= target;
 
   return (
-    <div className="text-center mb-12 animate-fade-in">
-      <div className="mb-12">
+    <div className="timer-section animate-fade-in">
+      <div className="timer-control-wrapper">
         <div className="segmented-control">
           <button 
             className={`segmented-item ${mode === 'prep' ? 'active' : ''}`}
@@ -53,8 +53,8 @@ export function Timer() {
         </div>
       </div>
       
-      <div className="mb-12">
-        <span className={`text-4xl ${isOver ? 'text-muted' : 'text-main'}`} style={{ fontVariantNumeric: 'tabular-nums' }}>
+      <div>
+        <span className={`timer-digits ${isOver ? 'text-muted' : 'text-main'}`} style={{ fontVariantNumeric: 'tabular-nums' }}>
           {formatTime(seconds)}
         </span>
       </div>

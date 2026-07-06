@@ -6,6 +6,7 @@ import { TOPICS } from '../data/topics';
 import { TopicCard } from '../components/TopicCard';
 import { Timer } from '../components/Timer';
 import { LoggerModal } from '../components/LoggerModal';
+import { ChevronDown } from 'lucide-react';
 
 const COPY = {
   en: {
@@ -197,38 +198,39 @@ export default function PracticePage() {
       </header>
 
       {/* Copy Intro */}
-      <div className="flex flex-col items-center text-center w-full mb-10 max-w-2xl mx-auto px-4">
-        <h1 className="hero-title text-center mb-4">
+      <div className="flex flex-col items-center text-center w-full max-w-2xl mx-auto px-4">
+        <h1 className="practice-headline">
           {t.headline}
         </h1>
-        <p className="hero-subtitle text-center text-muted max-w-[420px] mb-2">
+        <p className="practice-subheadline">
           {t.subheadline}
         </p>
-        <p className="text-xs font-semibold text-accent/80 uppercase tracking-widest max-w-[450px]">
+        <p className="practice-mode-desc">
           {mode === 'work' ? t.workDesc : t.casualDesc}
         </p>
       </div>
 
       {/* Control Bar */}
-      <div className="flex flex-wrap items-center justify-center gap-3 mb-10 w-full max-w-xl mx-auto px-4">
+      <div className="control-bar px-4">
         {/* Language Dropdown */}
-        <div className="relative">
+        <div className="dropdown-container">
           <button
             onClick={() => setIsLangOpen(!isLangOpen)}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-light bg-white text-xs font-bold hover:border-muted hover:bg-light transition-all shadow-sm cursor-pointer"
-            style={{ minWidth: '120px', justifyContent: 'space-between' }}
+            className={`dropdown-trigger ${isLangOpen ? 'open' : ''}`}
           >
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-2">
               <span>{currentLangObj.flag}</span>
               <span>{currentLangObj.label}</span>
             </span>
-            <span className="text-[9px] text-muted">▼</span>
+            <span className="dropdown-trigger-chevron">
+              <ChevronDown size={14} strokeWidth={2.5} />
+            </span>
           </button>
           
           {isLangOpen && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setIsLangOpen(false)} />
-              <div className="absolute left-0 mt-2 py-1.5 w-36 bg-white border border-light rounded-2xl shadow-lg z-50 animate-fade-in">
+              <div className="dropdown-menu animate-fade-in">
                 {LANGUAGES.map((l) => (
                   <button
                     key={l.code}
@@ -236,7 +238,7 @@ export default function PracticePage() {
                       setLang(l.code as LanguageCode);
                       setIsLangOpen(false);
                     }}
-                    className="flex items-center gap-2 w-full px-4 py-2.5 text-left text-xs font-semibold hover:bg-light transition-colors"
+                    className={`dropdown-item ${l.code === lang ? 'selected' : ''}`}
                   >
                     <span>{l.flag}</span>
                     <span>{l.label}</span>
@@ -248,12 +250,12 @@ export default function PracticePage() {
         </div>
 
         {/* Mode Selector */}
-        <div className="segmented-control p-1">
+        <div className="custom-segmented">
           {(['casual', 'work'] as ModeCode[]).map((m) => (
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`segmented-item px-4 py-1.5 text-xs font-bold rounded-full transition-all ${mode === m ? 'active' : ''}`}
+              className={`custom-segmented-item ${mode === m ? 'active' : ''}`}
             >
               {sel[m]}
             </button>
@@ -261,12 +263,12 @@ export default function PracticePage() {
         </div>
 
         {/* Difficulty Selector */}
-        <div className="segmented-control p-1">
+        <div className="custom-segmented">
           {(['easy', 'medium', 'hard'] as DifficultyCode[]).map((d) => (
             <button
               key={d}
               onClick={() => setDifficulty(d)}
-              className={`segmented-item px-4 py-1.5 text-xs font-bold rounded-full transition-all ${difficulty === d ? 'active' : ''}`}
+              className={`custom-segmented-item ${difficulty === d ? 'active' : ''}`}
             >
               {sel[d]}
             </button>
@@ -277,7 +279,7 @@ export default function PracticePage() {
       <div className="flex flex-col items-center w-full">
         <TopicCard topic={currentTopic || t.generating} />
         
-        <div className="w-full mb-12">
+        <div className="w-full">
           <Timer key={topicKey} />
         </div>
 
@@ -328,3 +330,4 @@ export default function PracticePage() {
     </div>
   );
 }
+
