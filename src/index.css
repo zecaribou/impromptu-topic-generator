@@ -610,3 +610,431 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     font-size: 14px;
   }
 }
+
+/* ==========================================
+   Speech Insights Tool Section
+   ========================================== */
+
+.insights-section {
+  width: 100%;
+  margin-top: 80px;
+  padding-top: 64px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--accent-light);
+  color: var(--text-main);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.insights-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  color: var(--text-main);
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 16px;
+}
+@media (min-width: 640px) {
+  .insights-title {
+    font-size: 3rem;
+  }
+}
+
+.insights-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+/* Dashboard Wrapper */
+.insights-dashboard {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.dashboard-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.01);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+/* Transcript Card Highlight styles */
+.transcript-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  font-weight: 400;
+}
+
+.h-tag {
+  position: relative;
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+/* Filler word style */
+.h-filler {
+  background-color: rgba(142, 142, 147, 0.12);
+  color: #555;
+  border-bottom: 2px dashed rgba(142, 142, 147, 0.4);
+}
+.h-filler:hover {
+  background-color: rgba(142, 142, 147, 0.2);
+}
+
+/* Hedging language style */
+.h-hedging {
+  background-color: rgba(255, 149, 0, 0.1);
+  color: #c97d00;
+  border-bottom: 2px solid rgba(255, 149, 0, 0.3);
+}
+.h-hedging:hover {
+  background-color: rgba(255, 149, 0, 0.18);
+}
+
+/* Strong phrase style */
+.h-strong {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: #248a3d;
+  border-bottom: 2px solid rgba(52, 199, 89, 0.3);
+}
+.h-strong:hover {
+  background-color: rgba(52, 199, 89, 0.18);
+}
+
+/* Long or unclear sentence style */
+.h-unclear {
+  background-color: rgba(0, 122, 255, 0.06);
+  color: #0066cc;
+  border-bottom: 2px dotted rgba(0, 122, 255, 0.3);
+}
+.h-unclear:hover {
+  background-color: rgba(0, 122, 255, 0.12);
+}
+
+/* Label bubble for highlighted words */
+.h-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  line-height: 1;
+}
+.h-label-filler { background-color: rgba(142, 142, 147, 0.15); color: #555; }
+.h-label-hedging { background-color: rgba(255, 149, 0, 0.15); color: #b25e00; }
+.h-label-strong { background-color: rgba(52, 199, 89, 0.15); color: #248a3d; }
+.h-label-unclear { background-color: rgba(0, 122, 255, 0.12); color: #0066cc; }
+
+/* Metrics Section */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.metric-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background: var(--accent-light);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.metric-val {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.metric-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Score Section */
+.scores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .scores-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.score-card-header {
+  display: flex;
+  justify-between: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.score-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.score-card-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.score-bar-bg {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 100%;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: width 0.8s ease-out;
+}
+
+.score-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Feedback Cards */
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .feedback-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fb-card {
+  border-left: 4px solid var(--text-main);
+}
+
+.fb-card.well {
+  border-left-color: #34c759;
+}
+
+.fb-card.improvement {
+  border-left-color: #ff9500;
+}
+
+.fb-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.fb-card-title.well {
+  color: #248a3d;
+}
+
+.fb-card-title.improvement {
+  color: #b25e00;
+}
+
+.fb-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-main);
+  font-weight: 400;
+}
+
+/* Recommendation Card */
+.rec-card {
+  border: 1px solid rgba(0,0,0,0.06);
+  background: linear-gradient(135deg, rgba(29, 29, 31, 0.02) 0%, rgba(29, 29, 31, 0) 100%);
+}
+
+.rec-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.rec-desc {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* Features Highlights Grid */
+.features-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 40px;
+  margin-bottom: 56px;
+  padding: 0 16px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.feat-card {
+  text-align: left;
+}
+
+.feat-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.feat-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Early Access CTA Section */
+.cta-block {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--text-main);
+  color: #fff;
+  border-radius: 24px;
+  padding: 48px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  margin-bottom: 64px;
+}
+@media (max-width: 600px) {
+  .cta-block {
+    padding: 36px 20px;
+    border-radius: 20px;
+  }
+}
+
+.cta-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+@media (min-width: 640px) {
+  .cta-title {
+    font-size: 2.25rem;
+  }
+}
+
+.cta-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.7);
+  max-width: 540px;
+  margin-bottom: 32px;
+}
+
+.cta-btn {
+  background-color: #fff;
+  color: var(--text-main);
+  padding: 16px 36px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: inline-block;
+  text-decoration: none;
+}
+.cta-btn:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+.cta-btn:active {
+  transform: scale(0.98);
+}
+@media (max-width: 600px) {
+  .cta-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.cta-supporting {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 16px;
+}

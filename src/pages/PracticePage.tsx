@@ -185,7 +185,8 @@ export default function PracticePage() {
     : (todaysTopics[topicKey] || '');
 
   return (
-    <div className="animate-fade-in pt-4 max-w-2xl mx-auto w-full">
+    <div className="animate-fade-in pt-4 w-full">
+      <div className="max-w-2xl mx-auto w-full">
       <header className="flex justify-between items-center mb-8 px-4">
         <h1 className="text-sm font-bold text-muted uppercase tracking-widest">
           Impromptu Practice
@@ -316,6 +317,191 @@ export default function PracticePage() {
           )}
         </div>
       </div>
+      </div>
+
+      {/* Speech Insights Section */}
+      <section className="insights-section">
+        <div className="coming-soon-badge">Coming soon</div>
+        <h2 className="insights-title">
+          Your personalized feedback for every speech you do here
+        </h2>
+        <p className="insights-subtitle">
+          Record your practice and receive clear, practical feedback on your clarity, confidence, structure, delivery and speaking habits.
+        </p>
+
+        {/* Mock Analytics Dashboard */}
+        <div className="insights-dashboard">
+          {/* Transcript Preview Card */}
+          <div className="dashboard-card">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+              <span className="text-xs font-bold text-muted uppercase tracking-wider">Transcript Preview</span>
+            </div>
+            <p className="transcript-text">
+              “<span className="h-tag h-unclear" title="Sentence structure could be more concise">
+                <span className="h-tag h-hedging" title="Hedging language makes points sound less decisive">I think</span> the main reason people struggle with public speaking is not because they have nothing to say, but because they are trying to sound perfect.<span className="h-label h-label-unclear">Long Sentence</span><span className="h-label h-label-hedging">Hedging</span>
+              </span>{" "}
+              <span className="h-tag h-filler" title="Filler word / transition hedge">Maybe</span> the better approach is to focus on{" "}
+              <span className="h-tag h-strong" title="Strong confident phrasing">being clear, structured and present</span>.<span className="h-label h-label-filler">Filler</span><span className="h-label h-label-strong">Strong</span>”
+            </p>
+          </div>
+
+          {/* Speech Metrics Card */}
+          <div className="dashboard-card">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+              <span className="text-xs font-bold text-muted uppercase tracking-wider">Speech Metrics</span>
+            </div>
+            <div className="metrics-row">
+              <div className="metric-box">
+                <span className="metric-val">2:14</span>
+                <span className="metric-lbl">Duration</span>
+              </div>
+              <div className="metric-box">
+                <span className="metric-val">138</span>
+                <span className="metric-lbl">WPM</span>
+              </div>
+              <div className="metric-box">
+                <span className="metric-val">7</span>
+                <span className="metric-lbl">Filler Words</span>
+              </div>
+              <div className="metric-box">
+                <span className="metric-val">4.2s</span>
+                <span className="metric-lbl">Longest Pause</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Feedback Scores Cards */}
+          <div className="scores-grid">
+            {/* Clarity */}
+            <div className="dashboard-card">
+              <div className="score-card-header">
+                <span className="score-card-title">Clarity</span>
+                <span className="score-card-value">82</span>
+              </div>
+              <div className="score-bar-bg">
+                <div className="score-bar-fill" style={{ width: '82%' }} />
+              </div>
+              <p className="score-card-desc">
+                Your opening is strong, but the middle section could be more focused.
+              </p>
+            </div>
+
+            {/* Confidence */}
+            <div className="dashboard-card">
+              <div className="score-card-header">
+                <span className="score-card-title">Confidence</span>
+                <span className="score-card-value">68</span>
+              </div>
+              <div className="score-bar-bg">
+                <div className="score-bar-fill" style={{ width: '68%', backgroundColor: '#ff9500' }} />
+              </div>
+              <p className="score-card-desc">
+                Hedging phrases like “I think” and “maybe” make your point sound less decisive.
+              </p>
+            </div>
+
+            {/* Structure */}
+            <div className="dashboard-card">
+              <div className="score-card-header">
+                <span className="score-card-title">Structure</span>
+                <span className="score-card-value">76</span>
+              </div>
+              <div className="score-bar-bg">
+                <div className="score-bar-fill" style={{ width: '76%' }} />
+              </div>
+              <p className="score-card-desc">
+                Your main point is clear, but your examples need a stronger sequence.
+              </p>
+            </div>
+
+            {/* Delivery */}
+            <div className="dashboard-card">
+              <div className="score-card-header">
+                <span className="score-card-title">Delivery</span>
+                <span className="score-card-value">73</span>
+              </div>
+              <div className="score-bar-bg">
+                <div className="score-bar-fill" style={{ width: '73%' }} />
+              </div>
+              <p className="score-card-desc">
+                Your pace is engaging, although some transitions feel slightly rushed.
+              </p>
+            </div>
+          </div>
+
+          {/* Personalised Feedback Cards */}
+          <div className="feedback-grid">
+            {/* What you did well */}
+            <div className="dashboard-card fb-card well">
+              <div className="fb-card-title well">What you did well</div>
+              <p className="fb-card-desc">
+                You introduced the topic clearly and used a relatable example.
+              </p>
+            </div>
+
+            {/* Room for improvement */}
+            <div className="dashboard-card fb-card improvement">
+              <div className="fb-card-title improvement">Biggest room for improvement</div>
+              <p className="fb-card-desc">
+                Make your conclusion more direct. End with one clear takeaway instead of trailing off.
+              </p>
+            </div>
+          </div>
+
+          {/* Next Practice Recommendation */}
+          <div className="dashboard-card rec-card">
+            <div className="rec-title">Next practice</div>
+            <p className="rec-desc">
+              Try a 1-minute answer where you make one point, give one example, and end with a clear takeaway.
+            </p>
+          </div>
+        </div>
+
+        {/* Benefits Highlights Section */}
+        <div className="features-section">
+          <div className="features-grid">
+            <div className="feat-card">
+              <h3 className="feat-title">Understand your speaking habits</h3>
+              <p className="feat-desc">
+                Spot filler words, repeated phrases and rushed transitions.
+              </p>
+            </div>
+            <div className="feat-card">
+              <h3 className="feat-title">Improve your structure</h3>
+              <p className="feat-desc">
+                See whether your answer has a clear opening, middle and takeaway.
+              </p>
+            </div>
+            <div className="feat-card">
+              <h3 className="feat-title">Build confidence over time</h3>
+              <p className="feat-desc">
+                Track clarity, confidence and delivery as you practise.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Early Access CTA Block */}
+        <div className="cta-block">
+          <h2 className="cta-title">Want personalised feedback on your speech?</h2>
+          <p className="cta-body">
+            Analyse your delivery, identify filler words, improve your structure, and receive practical recommendations after every practice.
+          </p>
+          <a
+            href="https://form.typeform.com/to/HHn3xfrg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-btn"
+          >
+            Sign up for early access
+          </a>
+          <span className="cta-supporting">
+            Be the first to access SpeechLab’s personalised speech analytics.
+          </span>
+        </div>
+      </section>
 
       {showLogger && (todaysTopics[topicKey] || isCompletedToday) && (
         <LoggerModal 
