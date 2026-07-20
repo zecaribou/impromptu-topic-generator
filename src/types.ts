@@ -1,6 +1,6 @@
 export type LanguageCode = 'en' | 'cn' | 'fr' | 'es';
 export type PracticeRating = 'Good' | 'Okay' | 'Struggled';
-export type ModeCode = 'casual' | 'work';
+export type ModeCode = 'everyday' | 'work' | 'challenge';
 export type DifficultyCode = 'easy' | 'medium' | 'hard';
 
 export interface PracticeSession {

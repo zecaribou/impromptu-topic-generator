@@ -12,8 +12,9 @@ const COPY = {
   en: {
     headline: "Think fast. Speak clearly.",
     subheadline: "Generate a prompt, start the timer, and practise speaking off the cuff.",
-    workDesc: "Practise interviews, pitches, networking, and structured answers.",
-    casualDesc: "Warm up with playful prompts, odd opinions, and low-pressure speaking drills.",
+    everydayDesc: "For conversation, personal stories, opinions and general speaking confidence.",
+    workDesc: "For realistic professional communication.",
+    challengeDesc: "For creativity, persuasion and faster thinking.",
     generateTopic: "Generate Topic",
     tryDifferent: "Try a different topic",
     completeLog: "Complete & Log Practice",
@@ -26,8 +27,9 @@ const COPY = {
   cn: {
     headline: "快速思考，清晰表达。",
     subheadline: "生成提示、启动计时器，并进行即兴演讲练习。",
-    workDesc: "练习面试、推介、社交和结构化回答。",
-    casualDesc: "用有趣的提示、奇特的观点和低压力的说话训练来热身。",
+    everydayDesc: "用于日常对话、个人故事、观点表达以及提升整体口语自信。",
+    workDesc: "用于真实的职场沟通与交流。",
+    challengeDesc: "用于锻炼创造力、说服力和快速反应能力。",
     generateTopic: "生成新主题",
     tryDifferent: "换个主题",
     completeLog: "完成并记录练习",
@@ -40,8 +42,9 @@ const COPY = {
   es: {
     headline: "Piensa rápido. Habla claro.",
     subheadline: "Genera un tema, inicia el temporizador y practica la oratoria improvisada.",
-    workDesc: "Practica entrevistas, discursos, networking y respuestas estructuradas.",
-    casualDesc: "Calienta con temas lúdicos, opiniones peculiares y ejercicios sencillos de expresión oral.",
+    everydayDesc: "Para conversación, historias personales, opiniones y confianza al hablar en general.",
+    workDesc: "Para comunicación profesional realista.",
+    challengeDesc: "Para creatividad, persuasión y pensamiento rápido.",
     generateTopic: "Generar Tema",
     tryDifferent: "Probar otro tema",
     completeLog: "Completar y Registrar Práctica",
@@ -54,8 +57,9 @@ const COPY = {
   fr: {
     headline: "Pensez vite. Parlez clairement.",
     subheadline: "Générez un sujet, lancez le chronomètre et entraînez-vous à parler à l'improviste.",
-    workDesc: "Entraînez-vous aux entretiens, pitchs, networking et réponses structurées.",
-    casualDesc: "Échauffez-vous avec des sujets ludiques, des opinions insolites et des exercices de parole sans pression.",
+    everydayDesc: "Pour la conversation, les histoires personnelles, les opinions et la confiance générale à l'oral.",
+    workDesc: "Pour une communication professionnelle réaliste.",
+    challengeDesc: "Pour la créativité, la persuasion et une réflexion rapide.",
     generateTopic: "Générer un sujet",
     tryDifferent: "Essayer un autre sujet",
     completeLog: "Terminer & Enregistrer la pratique",
@@ -69,29 +73,33 @@ const COPY = {
 
 const SELECTOR_LABELS = {
   en: {
-    casual: 'Casual',
+    everyday: 'Everyday',
     work: 'Work',
+    challenge: 'Challenge',
     easy: 'Easy',
     medium: 'Medium',
     hard: 'Hard'
   },
   cn: {
-    casual: '轻松',
+    everyday: '日常',
     work: '工作',
+    challenge: '挑战',
     easy: '简单',
     medium: '中等',
     hard: '困难'
   },
   es: {
-    casual: 'Informal',
+    everyday: 'Diario',
     work: 'Profesional',
+    challenge: 'Desafío',
     easy: 'Fácil',
     medium: 'Medio',
     hard: 'Difícil'
   },
   fr: {
-    casual: 'Informel',
+    everyday: 'Quotidien',
     work: 'Professionnel',
+    challenge: 'Défi',
     easy: 'Facile',
     medium: 'Moyen',
     hard: 'Difficile'
@@ -105,61 +113,96 @@ const LANGUAGES = [
   { code: 'fr', label: 'Français', flag: '🇫🇷' }
 ];
 
+const MODE_TYPES: Record<'everyday' | 'work' | 'challenge', string[]> = {
+  everyday: ['Mixed', 'Conversation', 'Personal Stories', 'Opinions', 'Explain It Simply'],
+  work: ['Mixed', 'Interview', 'Meetings', 'Presentations', 'Pitching', 'Leadership'],
+  challenge: ['Mixed', 'Persuade', 'Debate', 'Defend a Bad Idea', 'Creative Scenario', 'Hot Take']
+};
+
 export default function PracticePage() {
   const [lang, setLang] = useLocalStorage<LanguageCode>('selectedLanguage', 'en');
-  const [mode, setMode] = useLocalStorage<ModeCode>('selectedMode', 'casual');
+  const [storedMode, setMode] = useLocalStorage<ModeCode>('selectedMode', 'everyday');
   const [difficulty, setDifficulty] = useLocalStorage<DifficultyCode>('selectedDifficulty', 'easy');
+  const [topicType, setTopicType] = useLocalStorage<string>('selectedTopicType', 'Mixed');
   
   const [sessions, setSessions] = useLocalStorage<SessionsData>('sessions', {});
   const [streak, setStreak] = useLocalStorage<StreakData>('streak', { current: 0, longest: 0, lastDate: null });
   const [todaysTopics, setTodaysTopics] = useLocalStorage<Record<string, string>>('todaysTopics', {});
+  const [topicHistory, setTopicHistory] = useLocalStorage<Record<string, string[]>>('speechlab_topic_history', {});
   const [showLogger, setShowLogger] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isTypeOpen, setIsTypeOpen] = useState(false);
+
+  // Safeguard mode to handle legacy 'casual' values
+  const mode = (storedMode === 'everyday' || storedMode === 'work' || storedMode === 'challenge') ? storedMode : 'everyday';
 
   const today = new Date().toLocaleDateString('en-CA');
   const daySessions = sessions[today] || {};
   const isCompletedToday = !!daySessions[lang];
 
-  const topicKey = `${lang}-${mode}-${difficulty}`;
+  const topicKey = `${lang}-${mode}-${difficulty}-${topicType}`;
   const t = COPY[lang] || COPY.en;
   const sel = SELECTOR_LABELS[lang] || SELECTOR_LABELS.en;
   const currentLangObj = LANGUAGES.find(l => l.code === lang) || LANGUAGES[0];
 
+  // Reset topicType to Mixed when switching modes
+  useEffect(() => {
+    setTopicType('Mixed');
+  }, [mode, setTopicType]);
+
   // Topic generation logic
-  const generateTopic = () => {
-    const pool = TOPICS[lang]?.[mode]?.[difficulty];
-    if (!pool) return;
+  const generateTopic = (forceNew = false) => {
+    const pool = TOPICS[lang]?.[mode]?.[difficulty] || [];
+    const filteredPool = topicType === 'Mixed'
+      ? pool
+      : pool.filter(t => t.type === topicType);
 
-    const usedTopics: string[] = [];
-    Object.values(sessions).forEach(dayLogs => {
-      if (dayLogs) {
-        Object.keys(dayLogs).forEach(l => {
-          const log = dayLogs[l as LanguageCode];
-          if (log?.topic) usedTopics.push(log.topic);
-        });
-      }
-    });
+    if (filteredPool.length === 0) return;
 
-    const available = pool.filter(t => !usedTopics.includes(t));
-    const selectedPool = available.length > 0 ? available : pool;
-    const randomTopic = selectedPool[Math.floor(Math.random() * selectedPool.length)];
-    
+    const historyKey = `${lang}-${mode}-${difficulty}-${topicType}`;
+    const seenForThisFilter = topicHistory[historyKey] || [];
+
+    const existingTopic = todaysTopics[topicKey];
+    if (!forceNew && existingTopic && (existingTopic === '__EXHAUSTED__' || filteredPool.some(t => t.text === existingTopic))) {
+      return;
+    }
+
+    const available = filteredPool.filter(t => !seenForThisFilter.includes(t.text));
+
+    if (available.length === 0) {
+      setTodaysTopics(prev => ({
+        ...prev,
+        [topicKey]: "__EXHAUSTED__"
+      }));
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * available.length);
+    const selectedTopic = available[randomIndex];
+
+    // Save to history
+    const updatedHistory = {
+      ...topicHistory,
+      [historyKey]: [...seenForThisFilter, selectedTopic.text]
+    };
+    setTopicHistory(updatedHistory);
+
     setTodaysTopics(prev => ({
       ...prev,
-      [topicKey]: randomTopic
+      [topicKey]: selectedTopic.text
     }));
   };
 
   // Ensure a topic exists on load or configuration change
   useEffect(() => {
-    if (!isCompletedToday && !todaysTopics[topicKey]) {
-      generateTopic();
+    if (!isCompletedToday) {
+      generateTopic(false);
     }
-  }, [lang, mode, difficulty, isCompletedToday]);
+  }, [lang, mode, difficulty, topicType, isCompletedToday]);
 
   const handleLog = (rating: PracticeRating, note: string) => {
     const topic = todaysTopics[topicKey];
-    if (!topic) return;
+    if (!topic || topic === '__EXHAUSTED__') return;
     
     const newSessions = { ...sessions };
     if (!newSessions[today]) newSessions[today] = {};
@@ -180,9 +223,31 @@ export default function PracticePage() {
     setShowLogger(false);
   };
 
+  const resetCategoryHistory = () => {
+    const historyKey = `${lang}-${mode}-${difficulty}-${topicType}`;
+    const updatedHistory = { ...topicHistory };
+    updatedHistory[historyKey] = [];
+    setTopicHistory(updatedHistory);
+
+    setTodaysTopics(prev => {
+      const next = { ...prev };
+      delete next[topicKey];
+      return next;
+    });
+  };
+
+  const resetAllHistory = () => {
+    if (window.confirm("Are you sure you want to reset all topic history? This cannot be undone.")) {
+      setTopicHistory({});
+      setTodaysTopics({});
+    }
+  };
+
   const currentTopic = isCompletedToday 
     ? (daySessions[lang]?.topic || '') 
     : (todaysTopics[topicKey] || '');
+
+  const typesForMode = MODE_TYPES[mode] || [];
 
   return (
     <div className="animate-fade-in pt-4 w-full">
@@ -207,12 +272,12 @@ export default function PracticePage() {
           {t.subheadline}
         </p>
         <p className="practice-mode-desc">
-          {mode === 'work' ? t.workDesc : t.casualDesc}
+          {mode === 'everyday' ? t.everydayDesc : mode === 'work' ? t.workDesc : t.challengeDesc}
         </p>
       </div>
 
       {/* Control Bar */}
-      <div className="control-bar px-4">
+      <div className="control-bar px-4" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px' }}>
         {/* Language Dropdown */}
         <div className="dropdown-container">
           <button
@@ -252,7 +317,7 @@ export default function PracticePage() {
 
         {/* Mode Selector */}
         <div className="custom-segmented">
-          {(['casual', 'work'] as ModeCode[]).map((m) => (
+          {(['everyday', 'work', 'challenge'] as ModeCode[]).map((m) => (
             <button
               key={m}
               onClick={() => setMode(m)}
@@ -275,10 +340,63 @@ export default function PracticePage() {
             </button>
           ))}
         </div>
+
+        {/* Topic Type Dropdown */}
+        <div className="dropdown-container">
+          <button
+            onClick={() => setIsTypeOpen(!isTypeOpen)}
+            className={`dropdown-trigger ${isTypeOpen ? 'open' : ''}`}
+            style={{ minWidth: '160px' }}
+          >
+            <span className="flex items-center gap-2">
+              <span className="text-muted text-xs uppercase tracking-wider font-semibold mr-1">Type:</span>
+              <span>{topicType}</span>
+            </span>
+            <span className="dropdown-trigger-chevron">
+              <ChevronDown size={14} strokeWidth={2.5} />
+            </span>
+          </button>
+          
+          {isTypeOpen && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setIsTypeOpen(false)} />
+              <div className="dropdown-menu animate-fade-in" style={{ width: '190px' }}>
+                {typesForMode.map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => {
+                      setTopicType(t);
+                      setIsTypeOpen(false);
+                    }}
+                    className={`dropdown-item ${t === topicType ? 'selected' : ''}`}
+                  >
+                    <span>{t}</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col items-center w-full">
-        <TopicCard topic={currentTopic || t.generating} />
+        {currentTopic === '__EXHAUSTED__' ? (
+          <div className="topic-section animate-fade-in px-4 text-center" style={{ minHeight: '120px' }}>
+            <h2 className="topic-label">All Topics Completed</h2>
+            <p className="topic-text text-base font-semibold my-4">
+              You've completed all topics in this pool!
+            </p>
+            <button 
+              className="btn-primary py-2 px-6 text-sm"
+              onClick={resetCategoryHistory}
+              style={{ padding: '10px 24px', fontSize: '0.875rem' }}
+            >
+              Reset Category History
+            </button>
+          </div>
+        ) : (
+          <TopicCard topic={currentTopic || t.generating} />
+        )}
         
         <div className="w-full">
           <Timer key={topicKey} />
@@ -300,18 +418,29 @@ export default function PracticePage() {
             </>
           ) : (
             <>
-              <button 
-                className="btn-primary w-full shadow-lg shadow-accent/10" 
-                style={{ maxWidth: '320px' }}
-                onClick={() => setShowLogger(true)}
+              {currentTopic !== '__EXHAUSTED__' && (
+                <button 
+                  className="btn-primary w-full shadow-lg shadow-accent/10" 
+                  style={{ maxWidth: '320px' }}
+                  onClick={() => setShowLogger(true)}
+                >
+                  {t.completeLog}
+                </button>
+              )}
+              {currentTopic !== '__EXHAUSTED__' && (
+                <button 
+                  className="text-sm font-semibold text-muted hover:text-main transition-colors"
+                  onClick={() => generateTopic(true)}
+                >
+                  {t.tryDifferent}
+                </button>
+              )}
+              
+              <button
+                className="text-xs text-muted hover:text-main transition-colors mt-2"
+                onClick={resetAllHistory}
               >
-                {t.completeLog}
-              </button>
-              <button 
-                className="text-sm font-semibold text-muted hover:text-main transition-colors"
-                onClick={generateTopic}
-              >
-                {t.tryDifferent}
+                Reset all topic history
               </button>
             </>
           )}
