@@ -40,7 +40,7 @@ frTopics.work.medium[0] = { text: "Racontez une situation où vous avez dû gér
 frTopics.work.medium[1] = { text: "Pitcher votre projet actuel à un collaborateur potentiel pour le convaincre de vous rejoindre.", type: "Pitching" };
 frTopics.work.medium[2] = { text: "Expliquez une décision difficile que vous avez prise et la leçon que vous en avez tirée.", type: "Interview" };
 frTopics.work.medium[3] = { text: "Comment donnez-vous un feedback constructif à un collègue qui a tendance à se mettre sur la défensive ?", type: "Leadership" };
-frTopics.work.medium[4] = { text: "Décrivez comment vous avez réussi à aligner des membres d'une équipe aux objectifs contradictoires.", type: "Meetings" };
+frTopics.work.medium[4] = { text: "Décrivez comment vous avez réussi à aligner des membres d'une équipe aux objectifs contradictoires.", type: "Leadership" };
 frTopics.work.medium[5] = { text: "Parlez d'un projet qui a échoué malgré vos efforts. Quel a été votre retour d'expérience (post-mortem) ?", type: "Interview" };
 
 // Work - Hard overrides

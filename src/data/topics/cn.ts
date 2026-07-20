@@ -40,7 +40,7 @@ cnTopics.work.medium[0] = { text: "分享一次你面对不确定性（或危机
 cnTopics.work.medium[1] = { text: "向一位潜在的合作伙伴推介你目前正在做的项目。", type: "Pitching" };
 cnTopics.work.medium[2] = { text: "分享你做过的一个艰难决定，以及你从中收获了什么。", type: "Interview" };
 cnTopics.work.medium[3] = { text: "面对容易防备和敏感的下属或同事，你如何给出建设性的反馈？", type: "Leadership" };
-cnTopics.work.medium[4] = { text: "描述一次你协调团队内部利益冲突、达成共识的经历。", type: "Meetings" };
+cnTopics.work.medium[4] = { text: "描述一次你协调团队内部利益冲突、达成共识的经历。", type: "Leadership" };
 cnTopics.work.medium[5] = { text: "分享一次项目失败的经历，并说明你的复盘结论是什么。", type: "Interview" };
 
 // Work - Hard overrides

@@ -40,7 +40,7 @@ esTopics.work.medium[0] = { text: "Cuéntanos una experiencia en la que hayas te
 esTopics.work.medium[1] = { text: "Presenta tu proyecto actual a un posible colaborador para convencerle de unirse.", type: "Pitching" };
 esTopics.work.medium[2] = { text: "Explica una decisión difícil que hayas tomado en tu carrera y qué aprendiste de ella.", type: "Interview" };
 esTopics.work.medium[3] = { text: "¿Cómo le das feedback constructivo a un compañero de equipo que suele ponerse a la defensiva?", type: "Leadership" };
-esTopics.work.medium[4] = { text: "Describe una ocasión en la que tuviste que alinear a un equipo con objetivos o intereses en conflicto.", type: "Meetings" };
+esTopics.work.medium[4] = { text: "Describe una ocasión en la que tuviste que alinear a un equipo con objetivos o intereses en conflicto.", type: "Leadership" };
 esTopics.work.medium[5] = { text: "Cuéntanos sobre un proyecto que fracasó a pesar de tus esfuerzos. ¿Cuál fue el análisis posterior (post-mortem)?", type: "Interview" };
 
 // Work - Hard overrides

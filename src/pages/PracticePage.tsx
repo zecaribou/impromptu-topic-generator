@@ -115,7 +115,7 @@ const LANGUAGES = [
 
 const MODE_TYPES: Record<'everyday' | 'work' | 'challenge', string[]> = {
   everyday: ['Mixed', 'Conversation', 'Personal Stories', 'Opinions', 'Explain It Simply'],
-  work: ['Mixed', 'Interview', 'Meetings', 'Presentations', 'Pitching', 'Leadership'],
+  work: ['Mixed', 'Interview', 'Presentations', 'Pitching', 'Leadership'],
   challenge: ['Mixed', 'Persuade', 'Debate', 'Defend a Bad Idea', 'Creative Scenario', 'Hot Take']
 };
 
@@ -148,7 +148,7 @@ export default function PracticePage() {
   // Reset topicType to Mixed when switching modes
   useEffect(() => {
     setTopicType('Mixed');
-  }, [mode, setTopicType]);
+  }, [mode]);
 
   // Topic generation logic
   const generateTopic = (forceNew = false) => {
