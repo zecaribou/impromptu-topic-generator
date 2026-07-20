@@ -1,9 +1,15 @@
-export function TopicCard({ topic }: { topic: string }) {
+interface TopicCardProps {
+  topic: string;
+  labelTodayTopic: string;
+  labelSpeakHint: string;
+}
+
+export function TopicCard({ topic, labelTodayTopic, labelSpeakHint }: TopicCardProps) {
   return (
     <div className="topic-section animate-fade-in">
-      <h2 className="topic-label">Today's Topic</h2>
+      <h2 className="topic-label">{labelTodayTopic}</h2>
       <p className="topic-text">{topic || 'No topic generated'}</p>
-      <p className="topic-hint">Speak for 3–5 minutes</p>
+      <p className="topic-hint">{labelSpeakHint}</p>
     </div>
   );
 }

@@ -1,7 +1,59 @@
 import { useState, useEffect } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
+import type { LanguageCode } from '../types';
 
-export function Timer() {
+interface TimerProps {
+  lang?: LanguageCode;
+}
+
+const TIMER_LABELS: Record<LanguageCode, {
+  prep: string;
+  speak: string;
+  preset3: string;
+  preset5: string;
+  resetLabel: string;
+  playLabel: string;
+  pauseLabel: string;
+}> = {
+  en: {
+    prep: "Preparation",
+    speak: "Speaking",
+    preset3: "3m Preset",
+    preset5: "5m Preset",
+    resetLabel: "Reset Timer",
+    playLabel: "Play Timer",
+    pauseLabel: "Pause Timer"
+  },
+  cn: {
+    prep: "准备时间",
+    speak: "演讲时间",
+    preset3: "3分钟预设",
+    preset5: "5分钟预设",
+    resetLabel: "重置计时",
+    playLabel: "启动计时",
+    pauseLabel: "暂停计时"
+  },
+  es: {
+    prep: "Preparación",
+    speak: "Discurso",
+    preset3: "Predet. 3m",
+    preset5: "Predet. 5m",
+    resetLabel: "Reiniciar",
+    playLabel: "Iniciar",
+    pauseLabel: "Pausar"
+  },
+  fr: {
+    prep: "Préparation",
+    speak: "Prise de parole",
+    preset3: "3 min prédéfini",
+    preset5: "5 min prédéfini",
+    resetLabel: "Réinitialiser",
+    playLabel: "Démarrer",
+    pauseLabel: "Pause"
+  }
+};
+
+export function Timer({ lang = 'en' }: TimerProps) {
   const [timerMode, setTimerMode] = useState<'prep' | 'speak'>('prep');
   const [prepDuration, setPrepDuration] = useState(60); // 1 minute default
   const [speakDuration, setSpeakDuration] = useState(180); // 3 minutes default
@@ -9,6 +61,8 @@ export function Timer() {
   const [remainingSeconds, setRemainingSeconds] = useState(60);
   const [totalSeconds, setTotalSeconds] = useState(60);
   const [isActive, setIsActive] = useState(false);
+
+  const tl = TIMER_LABELS[lang] || TIMER_LABELS.en;
 
   // Sync remaining seconds when duration settings or mode change while timer is inactive
   useEffect(() => {
@@ -108,13 +162,13 @@ export function Timer() {
             className={`segmented-item ${timerMode === 'prep' ? 'active' : ''}`}
             onClick={() => { setTimerMode('prep'); reset(); }}
           >
-            Preparation
+            {tl.prep}
           </button>
           <button 
             className={`segmented-item ${timerMode === 'speak' ? 'active' : ''}`}
             onClick={() => { setTimerMode('speak'); reset(); }}
           >
-            Speaking
+            {tl.speak}
           </button>
         </div>
       </div>
@@ -149,7 +203,7 @@ export function Timer() {
         </svg>
         <div className="absolute-timer-content">
           <span className="timer-label">
-            {timerMode === 'prep' ? 'Preparation' : 'Speaking'}
+            {timerMode === 'prep' ? tl.prep : tl.speak}
           </span>
           <span 
             className="timer-digits-circle" 
@@ -162,14 +216,14 @@ export function Timer() {
 
       {/* Play / Pause / Reset Control Buttons */}
       <div className="flex justify-center items-center gap-8 mb-6">
-        <button onClick={reset} className="text-muted p-2 hover:text-main transition-colors" aria-label="Reset Timer">
+        <button onClick={reset} className="text-muted p-2 hover:text-main transition-colors" aria-label={tl.resetLabel}>
           <RotateCcw size={22} strokeWidth={2} />
         </button>
         <button 
           onClick={toggle} 
           className="p-2 hover:opacity-85 transition-opacity" 
           style={{ color: ringColor, transition: 'color 0.3s ease' }}
-          aria-label={isActive ? "Pause Timer" : "Play Timer"}
+          aria-label={isActive ? tl.pauseLabel : tl.playLabel}
         >
           {isActive ? (
             <Pause size={38} strokeWidth={2} fill="currentColor" />
@@ -194,13 +248,13 @@ export function Timer() {
                 className={`timer-preset-btn ${speakDuration === 180 ? 'active' : ''}`}
                 onClick={() => setSpeakingPreset(180)}
               >
-                3m Preset
+                {tl.preset3}
               </button>
               <button 
                 className={`timer-preset-btn ${speakDuration === 300 ? 'active' : ''}`}
                 onClick={() => setSpeakingPreset(300)}
               >
-                5m Preset
+                {tl.preset5}
               </button>
             </div>
             <div className="flex items-center gap-4">

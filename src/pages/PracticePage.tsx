@@ -10,6 +10,7 @@ import { ChevronDown } from 'lucide-react';
 
 const COPY = {
   en: {
+    title: "Impromptu Practice",
     headline: "Think fast. Speak clearly.",
     subheadline: "Generate a prompt, start the timer, and practise speaking off the cuff.",
     everydayDesc: "For conversation, personal stories, opinions and general speaking confidence.",
@@ -22,9 +23,20 @@ const COPY = {
     completeBody: "You've finished your English practice for today.",
     editLog: "Edit Practice Log",
     streak: (count: number) => `🔥 ${count} DAY STREAK`,
-    generating: "Generating prompt..."
+    generating: "Generating prompt...",
+    typeLabel: "Type:",
+    todayTopic: "Today's Topic",
+    speakHint: "Speak for 3–5 minutes",
+    allCompleted: "All Topics Completed",
+    completedPool: "You've completed all topics in this pool!",
+    resetCategory: "Reset Category History",
+    resetAll: "Reset all topic history",
+    confirmResetAll: "Are you sure you want to reset all topic history? This cannot be undone.",
+    confirmResetCategory: "Are you sure you want to reset history for this category? This cannot be undone.",
+    entrepreneurshipInstruction: "Use your own business, a product you know, or an imaginary idea."
   },
   cn: {
+    title: "即兴表达",
     headline: "快速思考，清晰表达。",
     subheadline: "生成提示、启动计时器，并进行即兴演讲练习。",
     everydayDesc: "用于日常对话、个人故事、观点表达以及提升整体口语自信。",
@@ -37,9 +49,20 @@ const COPY = {
     completeBody: "您已完成了今天的中文练习。",
     editLog: "修改练习记录",
     streak: (count: number) => `🔥 ${count} 天连续练习`,
-    generating: "生成提示中..."
+    generating: "生成提示中...",
+    typeLabel: "类型:",
+    todayTopic: "今日主题",
+    speakHint: "即兴演讲 3–5 分钟",
+    allCompleted: "已完成所有主题",
+    completedPool: "您已完成该分类下的所有主题！",
+    resetCategory: "重置该分类历史",
+    resetAll: "重置所有主题历史",
+    confirmResetAll: "您确定要重置所有主题的历史记录吗？此操作无法撤销。",
+    confirmResetCategory: "您确定要重置此分类的历史记录吗？此操作无法撤销。",
+    entrepreneurshipInstruction: "您可以使用自己的项目、所了解的产品或虚拟的想法进行练习。"
   },
   es: {
+    title: "Práctica Improvisada",
     headline: "Piensa rápido. Habla claro.",
     subheadline: "Genera un tema, inicia el temporizador y practica la oratoria improvisada.",
     everydayDesc: "Para conversación, historias personales, opiniones y confianza al hablar en general.",
@@ -52,9 +75,20 @@ const COPY = {
     completeBody: "Has terminado tu práctica de español por hoy.",
     editLog: "Editar Registro de Práctica",
     streak: (count: number) => `🔥 Racha de ${count} días`,
-    generating: "Generando tema..."
+    generating: "Generando tema...",
+    typeLabel: "Tipo:",
+    todayTopic: "Tema de hoy",
+    speakHint: "Habla durante 3–5 minutos",
+    allCompleted: "Todos los temas completados",
+    completedPool: "¡Has completado todos los temas de esta sección!",
+    resetCategory: "Reiniciar historial de categoría",
+    resetAll: "Reiniciar todo el historial",
+    confirmResetAll: "¿Está seguro de que desea reiniciar todo el historial de temas? Esta acción no se puede deshacer.",
+    confirmResetCategory: "¿Está seguro de que desea reiniciar el historial de esta categoría? Esta acción no se puede deshacer.",
+    entrepreneurshipInstruction: "Usa tu propio negocio, un producto que conozcas o una idea imaginaria."
   },
   fr: {
+    title: "Pratique improvisée",
     headline: "Pensez vite. Parlez clairement.",
     subheadline: "Générez un sujet, lancez le chronomètre et entraînez-vous à parler à l'improviste.",
     everydayDesc: "Pour la conversation, les histoires personnelles, les opinions et la confiance générale à l'oral.",
@@ -67,7 +101,17 @@ const COPY = {
     completeBody: "Vous avez terminé votre pratique de français pour aujourd'hui.",
     editLog: "Modifier le journal de pratique",
     streak: (count: number) => `🔥 Série de ${count} jours`,
-    generating: "Génération du sujet..."
+    generating: "Génération du sujet...",
+    typeLabel: "Type :",
+    todayTopic: "Sujet du jour",
+    speakHint: "Parlez pendant 3 à 5 minutes",
+    allCompleted: "Tous les sujets terminés",
+    completedPool: "Vous avez terminé tous les sujets de ce groupe !",
+    resetCategory: "Réinitialiser l'historique de la catégorie",
+    resetAll: "Réinitialiser tout l'historique",
+    confirmResetAll: "Êtes-vous sûr de vouloir réinitialiser tout l'historique des sujets ? Cette action est irréversible.",
+    confirmResetCategory: "Êtes-vous sûr de vouloir réinitialiser l'historique de cette catégorie ? Cette action est irréversible.",
+    entrepreneurshipInstruction: "Utilisez votre propre entreprise, un produit que vous connaissez ou une idée imaginaire."
   }
 };
 
@@ -106,6 +150,73 @@ const SELECTOR_LABELS = {
   }
 };
 
+const TYPE_LABELS: Record<LanguageCode, Record<string, string>> = {
+  en: {
+    'Mixed': 'Mixed',
+    'Conversation': 'Conversation',
+    'Personal Stories': 'Personal Stories',
+    'Opinions': 'Opinions',
+    'Explain It Simply': 'Explain It Simply',
+    'Interview': 'Interview',
+    'Presentations': 'Presentations',
+    'Entrepreneurship': 'Entrepreneurship',
+    'Leadership': 'Leadership',
+    'Persuade': 'Persuade',
+    'Debate': 'Debate',
+    'Defend a Bad Idea': 'Defend a Bad Idea',
+    'Creative Scenario': 'Creative Scenario',
+    'Hot Take': 'Hot Take'
+  },
+  cn: {
+    'Mixed': '混合',
+    'Conversation': '日常对话',
+    'Personal Stories': '个人故事',
+    'Opinions': '观点表达',
+    'Explain It Simply': '通俗讲解',
+    'Interview': '模拟面试',
+    'Presentations': '工作汇报',
+    'Entrepreneurship': '创业推介',
+    'Leadership': '团队领导',
+    'Persuade': '即兴说服',
+    'Debate': '即兴辩论',
+    'Defend a Bad Idea': '荒谬辩护',
+    'Creative Scenario': '创意脑洞',
+    'Hot Take': '奇葩观点'
+  },
+  es: {
+    'Mixed': 'Mixto',
+    'Conversation': 'Conversación',
+    'Personal Stories': 'Historias personales',
+    'Opinions': 'Opiniones',
+    'Explain It Simply': 'Explicar de forma sencilla',
+    'Interview': 'Entrevista',
+    'Presentations': 'Presentaciones',
+    'Entrepreneurship': 'Emprendimiento',
+    'Leadership': 'Liderazgo',
+    'Persuade': 'Persuasión',
+    'Debate': 'Debate',
+    'Defend a Bad Idea': 'Defender una mala idea',
+    'Creative Scenario': 'Escenario creativo',
+    'Hot Take': 'Opinión impopular'
+  },
+  fr: {
+    'Mixed': 'Mixte',
+    'Conversation': 'Conversation',
+    'Personal Stories': 'Histoires personnelles',
+    'Opinions': 'Opinions',
+    'Explain It Simply': 'Expliquer simplement',
+    'Interview': 'Entretien',
+    'Presentations': 'Présentations',
+    'Entrepreneurship': 'Entrepreneuriat',
+    'Leadership': 'Leadership',
+    'Persuade': 'Persuasion',
+    'Debate': 'Débat',
+    'Defend a Bad Idea': 'Défendre une mauvaise idée',
+    'Creative Scenario': 'Scénario créatif',
+    'Hot Take': 'Avis tranché'
+  }
+};
+
 const LANGUAGES = [
   { code: 'en', label: 'English', flag: '🇬🇧' },
   { code: 'cn', label: '中文', flag: '🇨🇳' },
@@ -115,7 +226,7 @@ const LANGUAGES = [
 
 const MODE_TYPES: Record<'everyday' | 'work' | 'challenge', string[]> = {
   everyday: ['Mixed', 'Conversation', 'Personal Stories', 'Opinions', 'Explain It Simply'],
-  work: ['Mixed', 'Interview', 'Presentations', 'Pitching', 'Leadership'],
+  work: ['Mixed', 'Interview', 'Presentations', 'Entrepreneurship', 'Leadership'],
   challenge: ['Mixed', 'Persuade', 'Debate', 'Defend a Bad Idea', 'Creative Scenario', 'Hot Take']
 };
 
@@ -224,20 +335,22 @@ export default function PracticePage() {
   };
 
   const resetCategoryHistory = () => {
-    const historyKey = `${lang}-${mode}-${difficulty}-${topicType}`;
-    const updatedHistory = { ...topicHistory };
-    updatedHistory[historyKey] = [];
-    setTopicHistory(updatedHistory);
+    if (window.confirm(t.confirmResetCategory)) {
+      const historyKey = `${lang}-${mode}-${difficulty}-${topicType}`;
+      const updatedHistory = { ...topicHistory };
+      updatedHistory[historyKey] = [];
+      setTopicHistory(updatedHistory);
 
-    setTodaysTopics(prev => {
-      const next = { ...prev };
-      delete next[topicKey];
-      return next;
-    });
+      setTodaysTopics(prev => {
+        const next = { ...prev };
+        delete next[topicKey];
+        return next;
+      });
+    }
   };
 
   const resetAllHistory = () => {
-    if (window.confirm("Are you sure you want to reset all topic history? This cannot be undone.")) {
+    if (window.confirm(t.confirmResetAll)) {
       setTopicHistory({});
       setTodaysTopics({});
     }
@@ -254,7 +367,7 @@ export default function PracticePage() {
       <div className="max-w-2xl mx-auto w-full">
       <header className="flex justify-between items-center mb-8 px-4">
         <h1 className="text-sm font-bold text-muted uppercase tracking-widest">
-          Impromptu Practice
+          {t.title}
         </h1>
         {streak.perLanguage?.[lang]?.current !== undefined && streak.perLanguage[lang].current > 0 && (
           <span className="text-[10px] font-bold text-accent">
@@ -349,8 +462,8 @@ export default function PracticePage() {
             style={{ minWidth: '160px' }}
           >
             <span className="flex items-center gap-2">
-              <span className="text-muted text-xs uppercase tracking-wider font-semibold mr-1">Type:</span>
-              <span>{topicType}</span>
+              <span className="text-muted text-xs uppercase tracking-wider font-semibold mr-1">{t.typeLabel}</span>
+              <span>{TYPE_LABELS[lang]?.[topicType] || topicType}</span>
             </span>
             <span className="dropdown-trigger-chevron">
               <ChevronDown size={14} strokeWidth={2.5} />
@@ -361,16 +474,16 @@ export default function PracticePage() {
             <>
               <div className="fixed inset-0 z-40" onClick={() => setIsTypeOpen(false)} />
               <div className="dropdown-menu animate-fade-in" style={{ width: '190px' }}>
-                {typesForMode.map((t) => (
+                {typesForMode.map((tItem) => (
                   <button
-                    key={t}
+                    key={tItem}
                     onClick={() => {
-                      setTopicType(t);
+                      setTopicType(tItem);
                       setIsTypeOpen(false);
                     }}
-                    className={`dropdown-item ${t === topicType ? 'selected' : ''}`}
+                    className={`dropdown-item ${tItem === topicType ? 'selected' : ''}`}
                   >
-                    <span>{t}</span>
+                    <span>{TYPE_LABELS[lang]?.[tItem] || tItem}</span>
                   </button>
                 ))}
               </div>
@@ -382,24 +495,35 @@ export default function PracticePage() {
       <div className="flex flex-col items-center w-full">
         {currentTopic === '__EXHAUSTED__' ? (
           <div className="topic-section animate-fade-in px-4 text-center" style={{ minHeight: '120px' }}>
-            <h2 className="topic-label">All Topics Completed</h2>
+            <h2 className="topic-label">{t.allCompleted}</h2>
             <p className="topic-text text-base font-semibold my-4">
-              You've completed all topics in this pool!
+              {t.completedPool}
             </p>
             <button 
               className="btn-primary py-2 px-6 text-sm"
               onClick={resetCategoryHistory}
               style={{ padding: '10px 24px', fontSize: '0.875rem' }}
             >
-              Reset Category History
+              {t.resetCategory}
             </button>
           </div>
         ) : (
-          <TopicCard topic={currentTopic || t.generating} />
+          <>
+            <TopicCard 
+              topic={currentTopic || t.generating} 
+              labelTodayTopic={t.todayTopic}
+              labelSpeakHint={t.speakHint}
+            />
+            {mode === 'work' && topicType === 'Entrepreneurship' && (
+              <p className="text-[11px] text-muted text-center italic mt-[-16px] mb-6 max-w-[320px] leading-relaxed">
+                {t.entrepreneurshipInstruction}
+              </p>
+            )}
+          </>
         )}
         
         <div className="w-full">
-          <Timer key={topicKey} />
+          <Timer key={topicKey} lang={lang} />
         </div>
 
         <div className="flex flex-col items-center w-full gap-4 px-4">
@@ -440,7 +564,7 @@ export default function PracticePage() {
                 className="text-xs text-muted hover:text-main transition-colors mt-2"
                 onClick={resetAllHistory}
               >
-                Reset all topic history
+                {t.resetAll}
               </button>
             </>
           )}
@@ -619,10 +743,10 @@ export default function PracticePage() {
             Analyse your delivery, identify filler words, improve your structure, and receive practical recommendations after every practice.
           </p>
           <a
-            href="https://form.typeform.com/to/HHn3xfrg"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-btn"
+             href="https://form.typeform.com/to/HHn3xfrg"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="cta-btn"
           >
             Sign up for early access
           </a>
@@ -645,4 +769,3 @@ export default function PracticePage() {
     </div>
   );
 }
-

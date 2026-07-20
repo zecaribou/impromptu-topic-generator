@@ -6,7 +6,7 @@ export interface Topic {
 export const enTopics = {
   everyday: {
     easy: [
-      // === CONVERSATION (25) ===
+      // === CONVERSATION ===
       { text: "What is your favorite season of the year and why?", type: "Conversation" },
       { text: "Describe a hobby you've always wanted to try.", type: "Conversation" },
       { text: "If you could only eat one meal for the rest of your life, what would it be?", type: "Conversation" },
@@ -32,8 +32,7 @@ export const enTopics = {
       { text: "What is a skill you think everyone should learn?", type: "Conversation" },
       { text: "Describe a museum or gallery exhibition that made an impression on you.", type: "Conversation" },
       { text: "If you could meet any historical figure, who would it be?", type: "Conversation" },
-
-      // === PERSONAL STORIES (25) ===
+      // === PERSONAL STORIES ===
       { text: "Tell a story about a time you got lost in a new city.", type: "Personal Stories" },
       { text: "Share a memory of a teacher who made a big impact on you.", type: "Personal Stories" },
       { text: "Describe a time you tried to cook something and it went completely wrong.", type: "Personal Stories" },
@@ -59,8 +58,7 @@ export const enTopics = {
       { text: "Share a story about a time you received a piece of advice you still remember.", type: "Personal Stories" },
       { text: "Describe a childhood toy or game that meant a lot to you.", type: "Personal Stories" },
       { text: "Tell us about a time you tried a food you thought you'd hate but actually loved.", type: "Personal Stories" },
-
-      // === OPINIONS (25) ===
+      // === OPINIONS ===
       { text: "Is it better to wake up early or stay up late?", type: "Opinions" },
       { text: "Should public transport be free for everyone in big cities?", type: "Opinions" },
       { text: "Do you believe physical books are better than digital e-readers?", type: "Opinions" },
@@ -86,36 +84,35 @@ export const enTopics = {
       { text: "Is a quiet evening at home better than a party out?", type: "Opinions" },
       { text: "Should everyone learn how to cook basic meals before leaving home?", type: "Opinions" },
       { text: "Is watching sports as exciting as playing them?", type: "Opinions" },
-
-      // === EXPLAIN IT SIMPLY (25) ===
-      { text: "Explain how to make a perfect cup of tea or coffee.", type: "Explain It Simply" },
+      // === EXPLAIN IT SIMPLY ===
+      { text: "Explain what a marathon is to a five-year-old.", type: "Explain It Simply" },
+      { text: "Explain how to tie a shoelace using only words.", type: "Explain It Simply" },
+      { text: "Explain what a library is to a child.", type: "Explain It Simply" },
+      { text: "Explain how a compass works to find north.", type: "Explain It Simply" },
+      { text: "Explain what a calendar is to a young child.", type: "Explain It Simply" },
       { text: "Explain the rules of Rock, Paper, Scissors.", type: "Explain It Simply" },
-      { text: "Explain what a library is to someone who has never heard of one.", type: "Explain It Simply" },
-      { text: "Explain how to wash a car step-by-step.", type: "Explain It Simply" },
-      { text: "Explain what a smart phone is to a time traveler from the year 1800.", type: "Explain It Simply" },
-      { text: "Explain how to plant a seed and make it grow.", type: "Explain It Simply" },
-      { text: "Explain the basic concept of recycling to a five-year-old.", type: "Explain It Simply" },
-      { text: "Explain how a physical calendar works.", type: "Explain It Simply" },
-      { text: "Explain the game of Hide and Seek.", type: "Explain It Simply" },
-      { text: "Explain how to pack a suitcase efficiently for a weekend trip.", type: "Explain It Simply" },
-      { text: "Explain what a cloud is in the sky.", type: "Explain It Simply" },
-      { text: "Explain how to cross a busy street safely.", type: "Explain It Simply" },
-      { text: "Explain what a bank does to a young child.", type: "Explain It Simply" },
-      { text: "Explain the basic rules of soccer.", type: "Explain It Simply" },
-      { text: "Explain how to send an email.", type: "Explain It Simply" },
+      { text: "Explain how a mirror works to a child.", type: "Explain It Simply" },
       { text: "Explain what an umbrella is used for.", type: "Explain It Simply" },
-      { text: "Explain how a mirror works without using complex physics.", type: "Explain It Simply" },
-      { text: "Explain what a holiday is.", type: "Explain It Simply" },
-      { text: "Explain how to use a microwave.", type: "Explain It Simply" },
-      { text: "Explain what a museum is.", type: "Explain It Simply" },
-      { text: "Explain the difference between a fruit and a vegetable.", type: "Explain It Simply" },
-      { text: "Explain how to make toast.", type: "Explain It Simply" },
-      { text: "Explain what a post office does.", type: "Explain It Simply" },
-      { text: "Explain why we sleep every night.", type: "Explain It Simply" },
-      { text: "Explain what gravity is using a simple demonstration description.", type: "Explain It Simply" }
+      { text: "Explain how to plant a seed and make it grow.", type: "Explain It Simply" },
+      { text: "Explain what a cloud is in the sky.", type: "Explain It Simply" },
+      { text: "Explain what a bank does to a young child.", type: "Explain It Simply" },
+      { text: "Explain the game of Hide and Seek.", type: "Explain It Simply" },
+      { text: "Explain how to cross a busy street safely.", type: "Explain It Simply" },
+      { text: "Explain how a post office works.", type: "Explain It Simply" },
+      { text: "Explain why leaves change color in autumn.", type: "Explain It Simply" },
+      { text: "Explain the rules of Tic-Tac-Toe to a child.", type: "Explain It Simply" },
+      { text: "Explain how a key opens a lock.", type: "Explain It Simply" },
+      { text: "Explain what a recipe is and why we use it.", type: "Explain It Simply" },
+      { text: "Explain what a shadow is to a toddler.", type: "Explain It Simply" },
+      { text: "Explain how a thermometer measures temperature.", type: "Explain It Simply" },
+      { text: "Explain what a mirror does.", type: "Explain It Simply" },
+      { text: "Explain how to wash your hands properly.", type: "Explain It Simply" },
+      { text: "Explain the difference between day and night to a toddler.", type: "Explain It Simply" },
+      { text: "Explain what traffic lights represent to a young child.", type: "Explain It Simply" },
+      { text: "Explain how to make toast.", type: "Explain It Simply" }
     ],
     medium: [
-      // === CONVERSATION (25) ===
+      // === CONVERSATION ===
       { text: "How has your definition of a successful day changed over the past five years?", type: "Conversation" },
       { text: "If you could experience one day in the future, what year would you choose?", type: "Conversation" },
       { text: "How do you decide which books or movies are worth your time?", type: "Conversation" },
@@ -141,8 +138,7 @@ export const enTopics = {
       { text: "If you could spend a month working on a creative project with unlimited funds, what would you make?", type: "Conversation" },
       { text: "How has your relationship with social media changed over time?", type: "Conversation" },
       { text: "Describe a travel experience that taught you something about yourself.", type: "Conversation" },
-
-      // === PERSONAL STORIES (25) ===
+      // === PERSONAL STORIES ===
       { text: "Tell a story about a major turning point in your life.", type: "Personal Stories" },
       { text: "Describe a time you took a risk and it didn't pay off, but you learned a lesson.", type: "Personal Stories" },
       { text: "Share a story about a time you had to perform or speak in public.", type: "Personal Stories" },
@@ -168,8 +164,7 @@ export const enTopics = {
       { text: "Describe a time you had to solve a complex puzzle or problem in real life.", type: "Personal Stories" },
       { text: "Tell us about a time you witnessed a random act of kindness that inspired you.", type: "Personal Stories" },
       { text: "Share a story about a hobby that became a major part of your identity.", type: "Personal Stories" },
-
-      // === OPINIONS (25) ===
+      // === OPINIONS ===
       { text: "Is a university degree still necessary for a successful career today?", type: "Opinions" },
       { text: "Should cities charge a fee for driving cars during peak hours?", type: "Opinions" },
       { text: "Does remote work improve or harm community and social connection?", type: "Opinions" },
@@ -195,36 +190,35 @@ export const enTopics = {
       { text: "Is censorship ever justified to maintain social harmony?", type: "Opinions" },
       { text: "Should public libraries receive more funding than municipal sports centers?", type: "Opinions" },
       { text: "Are global sporting events like the Olympics worth the huge financial costs?", type: "Opinions" },
-
-      // === EXPLAIN IT SIMPLY (25) ===
-      { text: "Explain how photosynthesis works without using complex scientific jargon.", type: "Explain It Simply" },
+      // === EXPLAIN IT SIMPLY ===
+      { text: "Explain inflation using the price of a sandwich.", type: "Explain It Simply" },
+      { text: "Explain the prisoner's dilemma using two friends sharing a pizza.", type: "Explain It Simply" },
+      { text: "Explain the butterfly effect to someone from the 1800s.", type: "Explain It Simply" },
+      { text: "Explain how the internet works to a grandparent.", type: "Explain It Simply" },
+      { text: "Explain what a stock market is using a food market analogy.", type: "Explain It Simply" },
+      { text: "Explain the concept of gravity using an apple.", type: "Explain It Simply" },
+      { text: "Explain why we have time zones around the world.", type: "Explain It Simply" },
+      { text: "Explain the concept of recycling using a plastic bottle.", type: "Explain It Simply" },
+      { text: "Explain how a refrigerator keeps food cold.", type: "Explain It Simply" },
+      { text: "Explain what credit cards are compared to cash.", type: "Explain It Simply" },
+      { text: "Explain the water cycle using a boiling pot analogy.", type: "Explain It Simply" },
+      { text: "Explain the concept of emotional intelligence to a teenager.", type: "Explain It Simply" },
+      { text: "Explain how GPS locates a phone on a map.", type: "Explain It Simply" },
+      { text: "Explain what a search engine does to search the web.", type: "Explain It Simply" },
       { text: "Explain the difference between weather and climate.", type: "Explain It Simply" },
-      { text: "Explain how inflation affects the purchasing power of money.", type: "Explain It Simply" },
-      { text: "Explain how GPS technology locates your phone on a map.", type: "Explain It Simply" },
-      { text: "Explain what cryptocurrency is and how it functions generally.", type: "Explain It Simply" },
-      { text: "Explain the concept of supply and demand.", type: "Explain It Simply" },
-      { text: "Explain how a standard search engine index works.", type: "Explain It Simply" },
-      { text: "Explain the difference between a credit card and a debit card.", type: "Explain It Simply" },
-      { text: "Explain the water cycle and how rain is formed.", type: "Explain It Simply" },
-      { text: "Explain the concept of carbon footprint to someone trying to live greener.", type: "Explain It Simply" },
-      { text: "Explain how a refrigerator cools food down.", type: "Explain It Simply" },
-      { text: "Explain what artificial intelligence is and how it learns.", type: "Explain It Simply" },
-      { text: "Explain the purpose of taxes in a society.", type: "Explain It Simply" },
-      { text: "Explain what a stock market is and why people buy shares.", type: "Explain It Simply" },
-      { text: "Explain how an electric car differs from a gas-powered car.", type: "Explain It Simply" },
-      { text: "Explain what biodiversity is and why it matters.", type: "Explain It Simply" },
-      { text: "Explain how vaccines protect the human body against diseases.", type: "Explain It Simply" },
-      { text: "Explain what a black hole is in space.", type: "Explain It Simply" },
-      { text: "Explain how Wi-Fi transmits data through walls.", type: "Explain It Simply" },
-      { text: "Explain the concept of emotional intelligence.", type: "Explain It Simply" },
-      { text: "Explain how a solar panel converts sunlight into power.", type: "Explain It Simply" },
-      { text: "Explain what organic food is compared to non-organic food.", type: "Explain It Simply" },
+      { text: "Explain what carbon footprint is using an everyday analogy.", type: "Explain It Simply" },
+      { text: "Explain how vaccines protect the body using a defense shield analogy.", type: "Explain It Simply" },
+      { text: "Explain the concept of supply and demand using tickets to a popular show.", type: "Explain It Simply" },
+      { text: "Explain how solar panels collect energy using a sponge analogy.", type: "Explain It Simply" },
+      { text: "Explain the difference between debt and equity using a lemonade stand.", type: "Explain It Simply" },
       { text: "Explain how the human eye adjusts to see in the dark.", type: "Explain It Simply" },
-      { text: "Explain the concept of compound interest.", type: "Explain It Simply" },
-      { text: "Explain what renewable energy is and list two common sources.", type: "Explain It Simply" }
+      { text: "Explain what artificial intelligence is using a learning pet analogy.", type: "Explain It Simply" },
+      { text: "Explain the purpose of taxes using community roads and parks.", type: "Explain It Simply" },
+      { text: "Explain what organic food means using traditional farming ideas.", type: "Explain It Simply" },
+      { text: "Explain the concept of compound interest using a growing snowball.", type: "Explain It Simply" }
     ],
     hard: [
-      // === CONVERSATION (25) ===
+      // === CONVERSATION ===
       { text: "Is human consciousness a product of biology, or is it something deeper?", type: "Conversation" },
       { text: "How do you think the rise of AI will alter the meaning of human creativity?", type: "Conversation" },
       { text: "What are the ethical responsibilities of individuals in an interconnected global crisis?", type: "Conversation" },
@@ -250,8 +244,7 @@ export const enTopics = {
       { text: "What is the ultimate purpose of art in a utilitarian society?", type: "Conversation" },
       { text: "How do we navigate the moral implications of genetic engineering in humans?", type: "Conversation" },
       { text: "Is economic growth a sustainable metric for measuring human progress?", type: "Conversation" },
-
-      // === PERSONAL STORIES (25) ===
+      // === PERSONAL STORIES ===
       { text: "Tell a story about a time you had to confront a deeply held prejudice within yourself.", type: "Personal Stories" },
       { text: "Describe a period of isolation or loneliness that transformed your perspective on life.", type: "Personal Stories" },
       { text: "Share a story about a time you had to make an ethical decision that cost you a relationship.", type: "Personal Stories" },
@@ -277,8 +270,7 @@ export const enTopics = {
       { text: "Tell a story about a time you had to speak up in a room full of people who disagreed with you.", type: "Personal Stories" },
       { text: "Share a memory of a time you had to adapt your entire communication style to reach someone.", type: "Personal Stories" },
       { text: "Describe a time you had to find beauty or meaning in a very dark place.", type: "Personal Stories" },
-
-      // === OPINIONS (25) ===
+      // === OPINIONS ===
       { text: "Should governments have the right to restrict individual freedoms in the name of public health?", type: "Opinions" },
       { text: "Is universal basic income (UBI) the best solution to job automation?", type: "Opinions" },
       { text: "Should tech giants be legally responsible for the content generated on their platforms?", type: "Opinions" },
@@ -304,38 +296,37 @@ export const enTopics = {
       { text: "Should the structure of the UN Security Council be reformed to reflect today's geopolitics?", type: "Opinions" },
       { text: "Is the current model of corporate capitalism compatible with environmental survival?", type: "Opinions" },
       { text: "Should high-speed rail networks be prioritized over airport infrastructure investments?", type: "Opinions" },
-
-      // === EXPLAIN IT SIMPLY (25) ===
+      // === EXPLAIN IT SIMPLY ===
+      { text: "Explain capitalism without using business jargon.", type: "Explain It Simply" },
+      { text: "Explain confirmation bias using an everyday example.", type: "Explain It Simply" },
+      { text: "Explain communism to someone who has never studied politics.", type: "Explain It Simply" },
+      { text: "Explain what an algorithm is without mentioning computers.", type: "Explain It Simply" },
       { text: "Explain the theory of relativity using an analogy of a train and a passenger.", type: "Explain It Simply" },
-      { text: "Explain how block chain technology ensures security without a central authority.", type: "Explain It Simply" },
-      { text: "Explain how neural networks learn patterns, comparing them to the human brain.", type: "Explain It Simply" },
-      { text: "Explain how quantum computing differs from classical computing.", type: "Explain It Simply" },
-      { text: "Explain the economic concept of quantitative easing and its consequences.", type: "Explain It Simply" },
-      { text: "Explain how gene editing tools like CRISPR find and edit DNA sequences.", type: "Explain It Simply" },
-      { text: "Explain the sociological concept of systemic bias.", type: "Explain It Simply" },
+      { text: "Explain the concept of systemic bias using a game with unequal starting rules.", type: "Explain It Simply" },
+      { text: "Explain how blockchain secures data without a central authority.", type: "Explain It Simply" },
       { text: "Explain the philosophy of existentialism in plain terms.", type: "Explain It Simply" },
-      { text: "Explain how market bubbles form and eventually pop.", type: "Explain It Simply" },
-      { text: "Explain how carbon dating determines the age of ancient organic matter.", type: "Explain It Simply" },
-      { text: "Explain the difference between monetary policy and fiscal policy.", type: "Explain It Simply" },
-      { text: "Explain how the global supply chain operates using a single product like a smartphone.", type: "Explain It Simply" },
-      { text: "Explain the concept of entropy and the second law of thermodynamics.", type: "Explain It Simply" },
-      { text: "Explain the prisoner's dilemma in game theory and its implications.", type: "Explain It Simply" },
-      { text: "Explain the mechanism of herd immunity.", type: "Explain It Simply" },
-      { text: "Explain the concept of algorithmic bias in machine learning.", type: "Explain It Simply" },
-      { text: "Explain how satellite communication networks like Starlink operate.", type: "Explain It Simply" },
-      { text: "Explain the psychological concept of cognitive dissonance.", type: "Explain It Simply" },
-      { text: "Explain the difference between debt financing and equity financing.", type: "Explain It Simply" },
-      { text: "Explain how nuclear fusion works compared to nuclear fission.", type: "Explain It Simply" },
-      { text: "Explain what dark matter is and why scientists believe it exists.", type: "Explain It Simply" },
-      { text: "Explain how carbon capture technology operates.", type: "Explain It Simply" },
-      { text: "Explain the concept of tragedy of the commons.", type: "Explain It Simply" },
-      { text: "Explain how the immune system remembers past infections.", type: "Explain It Simply" },
-      { text: "Explain the difference between a circular economy and a linear economy.", type: "Explain It Simply" }
+      { text: "Explain the tragedy of the commons using a shared community pasture.", type: "Explain It Simply" },
+      { text: "Explain how neural networks learn patterns, comparing them to human learning.", type: "Explain It Simply" },
+      { text: "Explain the concept of quantum computing using a spinning coin analogy.", type: "Explain It Simply" },
+      { text: "Explain the sociological concept of social contract.", type: "Explain It Simply" },
+      { text: "Explain the economic concept of quantitative easing using a board game analogy.", type: "Explain It Simply" },
+      { text: "Explain the second law of thermodynamics (entropy) using a messy bedroom analogy.", type: "Explain It Simply" },
+      { text: "Explain how gene editing (like CRISPR) works using a document text-editor analogy.", type: "Explain It Simply" },
+      { text: "Explain the concept of cognitive dissonance using a smokers' dilemma.", type: "Explain It Simply" },
+      { text: "Explain the difference between monetary policy and fiscal policy using household budget analogies.", type: "Explain It Simply" },
+      { text: "Explain how market bubbles form and pop using a housing craze example.", type: "Explain It Simply" },
+      { text: "Explain the concept of herd immunity using a rain umbrella analogy.", type: "Explain It Simply" },
+      { text: "Explain the difference between a circular economy and a linear economy.", type: "Explain It Simply" },
+      { text: "Explain how carbon capture technology operates using a filter analogy.", type: "Explain It Simply" },
+      { text: "Explain what renewable energy is and list two common sources.", type: "Explain It Simply" },
+      { text: "Explain how satellite communication networks operate using mirrors in space.", type: "Explain It Simply" },
+      { text: "Explain how carbon dating determines age using a ticking clock inside organic matter.", type: "Explain It Simply" },
+      { text: "Explain the concept of opportunity cost using choices on a menu.", type: "Explain It Simply" }
     ]
   },
   work: {
     easy: [
-      // === INTERVIEW (25) ===
+      // === INTERVIEW ===
       { text: "Tell me about yourself in 60 seconds.", type: "Interview" },
       { text: "What is your greatest professional strength?", type: "Interview" },
       { text: "Why are you interested in working in your industry?", type: "Interview" },
@@ -361,8 +352,7 @@ export const enTopics = {
       { text: "Describe a time you solved a minor technical difficulty.", type: "Interview" },
       { text: "What are your preferred work hours for focus?", type: "Interview" },
       { text: "Ask a teammate for clarification on their project updates.", type: "Interview" },
-
-      // === PRESENTATIONS (25) ===
+      // === PRESENTATIONS ===
       { text: "Introduce the main topic of your presentation.", type: "Presentations" },
       { text: "Explain a simple chart showing sales growth.", type: "Presentations" },
       { text: "Summarize the three key points of your presentation.", type: "Presentations" },
@@ -388,35 +378,33 @@ export const enTopics = {
       { text: "Confirm the main takeaway from a meeting discussion.", type: "Presentations" },
       { text: "Announce that a project phase is officially complete.", type: "Presentations" },
       { text: "Offer to take notes and share them with the team.", type: "Presentations" },
-
-      // === PITCHING (25) ===
-      { text: "Pitch a coffee shop idea that opens early for remote workers.", type: "Pitching" },
-      { text: "Pitch a simple recycling program for your local office.", type: "Pitching" },
-      { text: "Pitch a team-building lunch event to your manager.", type: "Pitching" },
-      { text: "Pitch a new organization folder structure for team assets.", type: "Pitching" },
-      { text: "Pitch a newsletter concept for keeping customers updated.", type: "Pitching" },
-      { text: "Pitch a standing desk trial for the team.", type: "Pitching" },
-      { text: "Pitch a monthly book club to improve team culture.", type: "Pitching" },
-      { text: "Pitch a calendar tool that blocks focus time automatically.", type: "Pitching" },
-      { text: "Pitch a quiet study room project in a co-working space.", type: "Pitching" },
-      { text: "Pitch a bike-to-work challenge to promote health.", type: "Pitching" },
-      { text: "Pitch a weekly casual coffee chat to reduce team isolation.", type: "Pitching" },
-      { text: "Pitch a tutorial video project to help onboard new clients.", type: "Pitching" },
-      { text: "Pitch a template for capturing project requirements.", type: "Pitching" },
-      { text: "Pitch a plant decoration initiative for the office.", type: "Pitching" },
-      { text: "Pitch a feedback form to improve client satisfaction.", type: "Pitching" },
-      { text: "Pitch a workshop to share keyboard shortcuts.", type: "Pitching" },
-      { text: "Pitch a walking meeting format to your direct teammate.", type: "Pitching" },
-      { text: "Pitch an onboarding checklist for new hires.", type: "Pitching" },
-      { text: "Pitch a digital noticeboard for team announcements.", type: "Pitching" },
-      { text: "Pitch a 10-minute daily stretching routine to the team.", type: "Pitching" },
-      { text: "Pitch a coffee subscription service for corporate offices.", type: "Pitching" },
-      { text: "Pitch an internal newsletter to share department wins.", type: "Pitching" },
-      { text: "Pitch an online Q&A session with the product team.", type: "Pitching" },
-      { text: "Pitch a local volunteer day for team building.", type: "Pitching" },
-      { text: "Pitch a designated quiet hour in the office schedule.", type: "Pitching" },
-
-      // === LEADERSHIP (25) ===
+      // === ENTREPRENEURSHIP ===
+      { text: "Pitch a product or business idea in 60 seconds.", type: "Entrepreneurship" },
+      { text: "What problem does your idea solve?", type: "Entrepreneurship" },
+      { text: "Who is the ideal customer?", type: "Entrepreneurship" },
+      { text: "Describe your product without using industry jargon.", type: "Entrepreneurship" },
+      { text: "What made you notice this problem?", type: "Entrepreneurship" },
+      { text: "What is the simplest version of your product?", type: "Entrepreneurship" },
+      { text: "Pitch an idea for a coffee shop that opens early for remote workers.", type: "Entrepreneurship" },
+      { text: "Pitch a simple recycling program for a local neighborhood.", type: "Entrepreneurship" },
+      { text: "Pitch a team-building event to a department manager.", type: "Entrepreneurship" },
+      { text: "Pitch a newsletter concept for keeping local customers updated.", type: "Entrepreneurship" },
+      { text: "Pitch a digital noticeboard for community announcements.", type: "Entrepreneurship" },
+      { text: "How does your target customer currently solve the problem?", type: "Entrepreneurship" },
+      { text: "What is the main benefit of your product or service?", type: "Entrepreneurship" },
+      { text: "Pitch a quiet study room project in a co-working space.", type: "Entrepreneurship" },
+      { text: "Describe how a user first discovers your product.", type: "Entrepreneurship" },
+      { text: "Pitch a bike-to-work challenge to promote team health.", type: "Entrepreneurship" },
+      { text: "What is the core value proposition of your business idea?", type: "Entrepreneurship" },
+      { text: "Pitch a monthly book club to improve workspace culture.", type: "Entrepreneurship" },
+      { text: "How did you validate that this problem exists?", type: "Entrepreneurship" },
+      { text: "Pitch a plant decoration service for corporate offices.", type: "Entrepreneurship" },
+      { text: "Describe the ideal member of your founding team.", type: "Entrepreneurship" },
+      { text: "Pitch a design template that simplifies project reporting.", type: "Entrepreneurship" },
+      { text: "What is the price you would charge for your service?", type: "Entrepreneurship" },
+      { text: "Pitch a 10-minute daily stretching routine to the team.", type: "Entrepreneurship" },
+      { text: "Why is this business idea exciting to you?", type: "Entrepreneurship" },
+      // === LEADERSHIP ===
       { text: "Acknowledge a team member's progress during a 1-on-1.", type: "Leadership" },
       { text: "Introduce a new work policy to the team clearly.", type: "Leadership" },
       { text: "Check in on a teammate who seems quieter than usual.", type: "Leadership" },
@@ -444,7 +432,7 @@ export const enTopics = {
       { text: "Acknowledge a teammate's hard work in front of the group.", type: "Leadership" }
     ],
     medium: [
-      // === INTERVIEW (25) ===
+      // === INTERVIEW ===
       { text: "Tell me about a time you resolved a conflict with a teammate.", type: "Interview" },
       { text: "How do you handle feedback that you disagree with?", type: "Interview" },
       { text: "Tell me about a project that failed. What did you learn?", type: "Interview" },
@@ -470,8 +458,7 @@ export const enTopics = {
       { text: "How do you handle research and development tasks with no clear path?", type: "Interview" },
       { text: "Describe a time you had to make a decision without all the information.", type: "Interview" },
       { text: "How do you maintain focus when transitioning between multiple client requests?", type: "Interview" },
-
-      // === PRESENTATIONS (25) ===
+      // === PRESENTATIONS ===
       { text: "Present a business case for upgrading our CRM tool.", type: "Presentations" },
       { text: "Explain a 10% drop in user engagement last month.", type: "Presentations" },
       { text: "Walk the team through a new client onboarding journey map.", type: "Presentations" },
@@ -497,35 +484,33 @@ export const enTopics = {
       { text: "Outline the key takeaways from a competitor product review.", type: "Presentations" },
       { text: "Propose a structure for onboarding a new corporate client.", type: "Presentations" },
       { text: "Lead a review of a project that did not meet its metrics.", type: "Presentations" },
-
-      // === PITCHING (25) ===
-      { text: "Pitch a remote-first policy change to company executives.", type: "Pitching" },
-      { text: "Pitch a subscription model change to existing customers.", type: "Pitching" },
-      { text: "Pitch a new partnership to a potential agency collaborator.", type: "Pitching" },
-      { text: "Pitch a redesign of the client dashboard to stakeholders.", type: "Pitching" },
-      { text: "Pitch a transition to a paperless office to managers.", type: "Pitching" },
-      { text: "Pitch a budget increase for design tools to the department head.", type: "Pitching" },
-      { text: "Pitch a flexible holiday policy to HR leaders.", type: "Pitching" },
-      { text: "Pitch a new corporate wellness program to the CEO.", type: "Pitching" },
-      { text: "Pitch a trial of an AI translation tool to the operations team.", type: "Pitching" },
-      { text: "Pitch a co-marketing campaign to a complementary brand.", type: "Pitching" },
-      { text: "Pitch a mentorship program to the internal talent team.", type: "Pitching" },
-      { text: "Pitch a product feature upgrade to a group of beta testers.", type: "Pitching" },
-      { text: "Pitch a server upgrade to the engineering management.", type: "Pitching" },
-      { text: "Pitch a client training program to the sales lead.", type: "Pitching" },
-      { text: "Pitch an office upgrade to improve employee collaboration.", type: "Pitching" },
-      { text: "Pitch a transition to a carbon-neutral shipping partner.", type: "Pitching" },
-      { text: "Pitch a client onboarding software trial to the customer success team.", type: "Pitching" },
-      { text: "Pitch a regular tech talk schedule to the engineering lead.", type: "Pitching" },
-      { text: "Pitch a corporate volunteering day to the leadership team.", type: "Pitching" },
-      { text: "Pitch a budget for external user research to the product owner.", type: "Pitching" },
-      { text: "Pitch a new analytics module to the product manager.", type: "Pitching" },
-      { text: "Pitch a customer newsletter revamp to the marketing team.", type: "Pitching" },
-      { text: "Pitch a security audit budget to the financial director.", type: "Pitching" },
-      { text: "Pitch a joint hackathon to a partnering development agency.", type: "Pitching" },
-      { text: "Pitch a dedicated accessibility review for all customer channels.", type: "Pitching" },
-
-      // === LEADERSHIP (25) ===
+      // === ENTREPRENEURSHIP ===
+      { text: "How would you convince your first ten customers to try your product?", type: "Entrepreneurship" },
+      { text: "What alternatives do customers currently use?", type: "Entrepreneurship" },
+      { text: "Why is your solution better than doing nothing?", type: "Entrepreneurship" },
+      { text: "How would your company make money?", type: "Entrepreneurship" },
+      { text: "What evidence would show that customers genuinely want this?", type: "Entrepreneurship" },
+      { text: "Why are you the right person to build this?", type: "Entrepreneurship" },
+      { text: "How do you plan to reach your target customers?", type: "Entrepreneurship" },
+      { text: "What are the key features of your competitor's product, and how do you differ?", type: "Entrepreneurship" },
+      { text: "Pitch a remote-first policy change to company executives.", type: "Entrepreneurship" },
+      { text: "Pitch a subscription model change to existing customers.", type: "Entrepreneurship" },
+      { text: "Pitch a partnership to a complementary service provider.", type: "Entrepreneurship" },
+      { text: "Pitch a redesign of a client dashboard to stakeholders.", type: "Entrepreneurship" },
+      { text: "How would you describe your go-to-market strategy?", type: "Entrepreneurship" },
+      { text: "What are the main unit economics of your business model?", type: "Entrepreneurship" },
+      { text: "How do you handle feedback from users that contradicts your roadmap?", type: "Entrepreneurship" },
+      { text: "Pitch a new wellness program to a company CEO.", type: "Entrepreneurship" },
+      { text: "Describe the key milestones you want to reach in the next six months.", type: "Entrepreneurship" },
+      { text: "Pitch a transition to a paperless workflow to managers.", type: "Entrepreneurship" },
+      { text: "How do you gather user feedback during the early product stages?", type: "Entrepreneurship" },
+      { text: "Pitch a mentorship program to the internal talent team.", type: "Entrepreneurship" },
+      { text: "What is the biggest risk your product faces today?", type: "Entrepreneurship" },
+      { text: "Pitch a trial of an AI translation tool to the operations team.", type: "Entrepreneurship" },
+      { text: "How do you define a highly active user for your product?", type: "Entrepreneurship" },
+      { text: "Pitch a client training program to the sales lead.", type: "Entrepreneurship" },
+      { text: "Describe your customer retention strategy.", type: "Entrepreneurship" },
+      // === LEADERSHIP ===
       { text: "Deliver constructive feedback to a direct report on their delivery style.", type: "Leadership" },
       { text: "Lead the team through a sudden project budget cut of 10%.", type: "Leadership" },
       { text: "Introduce a restructuring of department roles to your team.", type: "Leadership" },
@@ -553,7 +538,7 @@ export const enTopics = {
       { text: "Conduct a post-mortem review on a major client service delay.", type: "Leadership" }
     ],
     hard: [
-      // === INTERVIEW (25) ===
+      // === INTERVIEW ===
       { text: "How would you handle a stakeholder who refuses to cooperate with your project goals?", type: "Interview" },
       { text: "Tell me about a strategic decision you made that failed. What was your recovery plan?", type: "Interview" },
       { text: "How do you navigate a company culture that is resistant to innovation?", type: "Interview" },
@@ -579,8 +564,7 @@ export const enTopics = {
       { text: "Describe a time you had to explain a complex system failure to non-technical leaders.", type: "Interview" },
       { text: "How do you handle a situation where a key project manager quits in the middle of a launch?", type: "Interview" },
       { text: "Tell me about a time you had to defend your team's estimates against aggressive leadership demands.", type: "Interview" },
-
-      // === PRESENTATIONS (25) ===
+      // === PRESENTATIONS ===
       { text: "Present a strategic plan for moving into the European market.", type: "Presentations" },
       { text: "Explain a complex system failure that led to data loss.", type: "Presentations" },
       { text: "Present a business model pivot to a room of venture capitalists.", type: "Presentations" },
@@ -606,35 +590,33 @@ export const enTopics = {
       { text: "Present an analysis of a failed entry into a competitive market and core lessons learned.", type: "Presentations" },
       { text: "Present a strategic restructure proposal to address a 15% workforce reduction.", type: "Presentations" },
       { text: "Explain the strategic risks and timeline of a major database architecture migration.", type: "Presentations" },
-
-      // === PITCHING (25) ===
-      { text: "Pitch a traditional, outdated logistics company to a technology venture fund.", type: "Pitching" },
-      { text: "Pitch a complete rewrite of the core product database to the board.", type: "Pitching" },
-      { text: "Pitch a spin-off of a division to existing shareholders.", type: "Pitching" },
-      { text: "Pitch a high-risk research project with a 5-year timeline to investors.", type: "Pitching" },
-      { text: "Pitch a zero-workweek trial for a department to the CEO.", type: "Pitching" },
-      { text: "Pitch an acquisition proposal to a smaller competitor.", type: "Pitching" },
-      { text: "Pitch a transition to a fully open-source product model.", type: "Pitching" },
-      { text: "Pitch a pricing restructure that increases costs for key clients.", type: "Pitching" },
-      { text: "Pitch a joint development project to a major competitor.", type: "Pitching" },
-      { text: "Pitch a budget increase of 100% for user experience design.", type: "Pitching" },
-      { text: "Pitch a pivot from B2C to B2B to the company founders.", type: "Pitching" },
-      { text: "Pitch a plan to automate 30% of administrative roles to HR leads.", type: "Pitching" },
-      { text: "Pitch an offshore development center to the engineering management.", type: "Pitching" },
-      { text: "Pitch a product recalls campaign to address a defect.", type: "Pitching" },
-      { text: "Pitch a transition to a carbon-negative manufacturing process.", type: "Pitching" },
-      { text: "Pitch an executive search project to the board of directors.", type: "Pitching" },
-      { text: "Pitch a decentralization of decision-making authority to the CEO.", type: "Pitching" },
-      { text: "Pitch a patent defense lawsuit to the executive committee.", type: "Pitching" },
-      { text: "Pitch a strategic alliance with a major state-owned enterprise.", type: "Pitching" },
-      { text: "Pitch a transition to a fully automated customer service system.", type: "Pitching" },
-      { text: "Pitch a new equity incentive scheme to skeptical key investors.", type: "Pitching" },
-      { text: "Pitch a cloud provider migration to the technical steering committee.", type: "Pitching" },
-      { text: "Pitch a joint venture structure to a foreign corporate director.", type: "Pitching" },
-      { text: "Pitch a strategic patent acquisition to the executive leadership team.", type: "Pitching" },
-      { text: "Pitch a complete outsourcing of non-core operations to save 20% budget.", type: "Pitching" },
-
-      // === LEADERSHIP (25) ===
+      // === ENTREPRENEURSHIP ===
+      { text: "How large could this market become, and what assumptions support your estimate?", type: "Entrepreneurship" },
+      { text: "What prevents a larger company from copying your product?", type: "Entrepreneurship" },
+      { text: "Why is now the right time for this company to exist?", type: "Entrepreneurship" },
+      { text: "Which part of your business model is most likely to fail?", type: "Entrepreneurship" },
+      { text: "What would you need to prove before raising investment?", type: "Entrepreneurship" },
+      { text: "If growth stopped tomorrow, what would you investigate first?", type: "Entrepreneurship" },
+      { text: "What is your strongest competitive advantage, and how could it weaken over time?", type: "Entrepreneurship" },
+      { text: "Pitch a high-risk research project with a 5-year timeline to investors.", type: "Entrepreneurship" },
+      { text: "Pitch a zero-workweek trial for a department to the CEO.", type: "Entrepreneurship" },
+      { text: "Describe how you would build a moat around your proprietary data.", type: "Entrepreneurship" },
+      { text: "Pitch a complete database transition that requires three months of developer time to the board.", type: "Entrepreneurship" },
+      { text: "What would you say to a key client who wants to leave for a cheaper competitor?", type: "Entrepreneurship" },
+      { text: "Pitch an acquisition proposal to a smaller competitor.", type: "Entrepreneurship" },
+      { text: "How do you balance resource allocation between current growth and future product R&D?", type: "Entrepreneurship" },
+      { text: "Pitch a pricing restructure that increases costs for key clients.", type: "Entrepreneurship" },
+      { text: "Describe your response strategy to a competitor launching a clone of your product.", type: "Entrepreneurship" },
+      { text: "How do you measure the success of a major strategic pivot?", type: "Entrepreneurship" },
+      { text: "Pitch a joint venture to a major competitor.", type: "Entrepreneurship" },
+      { text: "Pitch a pivot from B2C to B2B to the company founders.", type: "Entrepreneurship" },
+      { text: "What is your strategy for hiring key executives during rapid growth?", type: "Entrepreneurship" },
+      { text: "Describe how you handle conflicting demands between two large enterprise clients.", type: "Entrepreneurship" },
+      { text: "Pitch a plan to automate 30% of administrative roles to HR leads.", type: "Entrepreneurship" },
+      { text: "How do you evaluate whether a project should be canceled or continued?", type: "Entrepreneurship" },
+      { text: "Pitch a transition to a fully open-source product model.", type: "Entrepreneurship" },
+      { text: "What is the most critical metric for your business, and why does it take priority?", type: "Entrepreneurship" },
+      // === LEADERSHIP ===
       { text: "Deliver news of a sudden 15% workforce reduction to the company.", type: "Leadership" },
       { text: "Lead the company through a strategic response to a hostile takeover bid.", type: "Leadership" },
       { text: "Rebuild team alignment after a highly publicized product failure.", type: "Leadership" },
@@ -664,7 +646,7 @@ export const enTopics = {
   },
   challenge: {
     easy: [
-      // === PERSUADE (20) ===
+      // === PERSUADE ===
       { text: "Convince us that breakfast should be served all day.", type: "Persuade" },
       { text: "Persuade your friend that watching a funny video is the best cure for a bad mood.", type: "Persuade" },
       { text: "Persuade your family to spend a sunny afternoon walking instead of sitting inside.", type: "Persuade" },
@@ -685,8 +667,7 @@ export const enTopics = {
       { text: "Convince me that physical letters are more special than text messages.", type: "Persuade" },
       { text: "Persuade your family to plant some flowers in a window box.", type: "Persuade" },
       { text: "Convince your friend to learn how to whistle a happy tune.", type: "Persuade" },
-
-      // === DEBATE (20) ===
+      // === DEBATE ===
       { text: "Debate: Is summer better than winter?", type: "Debate" },
       { text: "Debate: Physical books vs. Digital e-readers for daily reading.", type: "Debate" },
       { text: "Debate: Is morning the best time to exercise?", type: "Debate" },
@@ -707,8 +688,7 @@ export const enTopics = {
       { text: "Debate: Is autumn the most beautiful season of the year?", type: "Debate" },
       { text: "Debate: Using physical cash vs. digital cards for small payments.", type: "Debate" },
       { text: "Debate: Should we read the news once a day vs. checking it constantly?", type: "Debate" },
-
-      // === DEFEND A BAD IDEA (20) ===
+      // === DEFEND A BAD IDEA ===
       { text: "Defend wearing pyjamas to the supermarket.", type: "Defend a Bad Idea" },
       { text: "Defend replacing all chairs in the house with giant exercise balls.", type: "Defend a Bad Idea" },
       { text: "Defend the idea that we should only wear mismatched socks.", type: "Defend a Bad Idea" },
@@ -729,8 +709,7 @@ export const enTopics = {
       { text: "Defend the rule that everyone must sing their names instead of saying them.", type: "Defend a Bad Idea" },
       { text: "Defend replacing the kitchen sink with a large bucket.", type: "Defend a Bad Idea" },
       { text: "Defend the policy that all digital screens must be kept in black-and-white mode.", type: "Defend a Bad Idea" },
-
-      // === CREATIVE SCENARIO (20) ===
+      // === CREATIVE SCENARIO ===
       { text: "Invent a new use for an umbrella.", type: "Creative Scenario" },
       { text: "You woke up and realized you can speak fluent dog. What is your first conversation?", type: "Creative Scenario" },
       { text: "You are the captain of a pirate ship that only steals books. Describe a successful raid.", type: "Creative Scenario" },
@@ -751,8 +730,7 @@ export const enTopics = {
       { text: "Describe a garden where plants grow musical instruments instead of fruit.", type: "Creative Scenario" },
       { text: "You are a mouse who has secretly been directing a human cooking show. Describe your day.", type: "Creative Scenario" },
       { text: "You discover a radio that only plays songs from parallel universes. Describe one song.", type: "Creative Scenario" },
-
-      // === HOT TAKE (20) ===
+      // === HOT TAKE ===
       { text: "Hot Take: Birthdays are overrated and we shouldn't make a big deal of them.", type: "Hot Take" },
       { text: "Hot Take: Cold pizza from yesterday is much better than fresh hot pizza.", type: "Hot Take" },
       { text: "Hot Take: Social media has actually made the world a more boring place.", type: "Hot Take" },
@@ -775,7 +753,7 @@ export const enTopics = {
       { text: "Hot Take: Receiving physical letters is stressful because you have to write back.", type: "Hot Take" }
     ],
     medium: [
-      // === PERSUADE (20) ===
+      // === PERSUADE ===
       { text: "Persuade a company to introduce a four-day working week.", type: "Persuade" },
       { text: "Persuade your local town council to replace a central road with a walking path.", type: "Persuade" },
       { text: "Persuade a group of friends to try a weekend offline with no digital devices.", type: "Persuade" },
@@ -796,8 +774,7 @@ export const enTopics = {
       { text: "Persuade a city to make public transport completely free for residents.", type: "Persuade" },
       { text: "Persuade a department manager to start a mentorship program for newcomers.", type: "Persuade" },
       { text: "Persuade a client to accept a minor delay to ensure a much higher quality output.", type: "Persuade" },
-
-      // === DEBATE (20) ===
+      // === DEBATE ===
       { text: "Debate: Should university education be free for everyone?", type: "Debate" },
       { text: "Debate: Remote working vs. office working for creative collaboration.", type: "Debate" },
       { text: "Debate: Should fast food products be taxed higher to support public health?", type: "Debate" },
@@ -818,8 +795,7 @@ export const enTopics = {
       { text: "Debate: Should corporate lobbying be limited by strict legislation?", type: "Debate" },
       { text: "Debate: Space exploration funding vs. deep ocean research funding.", type: "Debate" },
       { text: "Debate: Centralized school curricula vs. local school board autonomy.", type: "Debate" },
-
-      // === DEFEND A BAD IDEA (20) ===
+      // === DEFEND A BAD IDEA ===
       { text: "Defend the idea that phones should automatically switch off after 9 p.m.", type: "Defend a Bad Idea" },
       { text: "Defend replacing all currency with colorful seashells.", type: "Defend a Bad Idea" },
       { text: "Defend the rule that we should only speak in alphabetical order.", type: "Defend a Bad Idea" },
@@ -840,8 +816,7 @@ export const enTopics = {
       { text: "Defend printing all official documents in Comic Sans font.", type: "Defend a Bad Idea" },
       { text: "Defend replacing door handles with mechanical puzzles.", type: "Defend a Bad Idea" },
       { text: "Defend replacing morning alarms with a mechanism that tilts your bed.", type: "Defend a Bad Idea" },
-
-      // === CREATIVE SCENARIO (20) ===
+      // === CREATIVE SCENARIO ===
       { text: "Create a campaign to make waiting in queues enjoyable.", type: "Creative Scenario" },
       { text: "You discover a device that lets you pause time for everyone except yourself. Describe your first hour.", type: "Creative Scenario" },
       { text: "You wake up to find that you are the last human on Earth, but all utilities are functional. What is your plan?", type: "Creative Scenario" },
@@ -862,8 +837,7 @@ export const enTopics = {
       { text: "You find a box containing the keys to every door in your city. What do you do?", type: "Creative Scenario" },
       { text: "You wake up to find that your house has moved 100 miles north overnight. Describe your reaction.", type: "Creative Scenario" },
       { text: "You are a detective solving a crime where the only clue is a single green leaf. Describe the investigation.", type: "Creative Scenario" },
-
-      // === HOT TAKE (20) ===
+      // === HOT TAKE ===
       { text: "Hot Take: Remote work is slowly destroying the concept of weekends and focus time.", type: "Hot Take" },
       { text: "Hot Take: University degrees have become an expensive form of HR screening with little value.", type: "Hot Take" },
       { text: "Hot Take: Clean desks reduce creativity; messy desks are superior for thinking.", type: "Hot Take" },
@@ -886,7 +860,7 @@ export const enTopics = {
       { text: "Hot Take: Team-building exercises do not build trust; shared struggle does.", type: "Hot Take" }
     ],
     hard: [
-      // === PERSUADE (20) ===
+      // === PERSUADE ===
       { text: "Persuade society to value failure as highly as success.", type: "Persuade" },
       { text: "Persuade a government panel to ban all algorithmic recommendation feeds for minors.", type: "Persuade" },
       { text: "Persuade a group of legacy bank executives to transition completely to a decentralized model.", type: "Persuade" },
@@ -907,8 +881,7 @@ export const enTopics = {
       { text: "Persuade a government authority to declare internet access a public utility like water.", type: "Persuade" },
       { text: "Persuade a skeptical jury that algorithms should not be used in sentencing recommendations.", type: "Persuade" },
       { text: "Persuade a regional council to implement strict rent controls despite developer opposition.", type: "Persuade" },
-
-      // === DEBATE (20) ===
+      // === DEBATE ===
       { text: "Argue that convenience can weaken people’s independence.", type: "Debate" },
       { text: "Debate: Should governments regulate AI development to prevent job loss?", type: "Debate" },
       { text: "Debate: Universal Basic Income vs. Federal Job Guarantees in an automated economy.", type: "Debate" },
@@ -929,8 +902,7 @@ export const enTopics = {
       { text: "Debate: Linking retirement age to life expectancy vs. Fixed retirement age benefits.", type: "Debate" },
       { text: "Debate: High-speed rail infrastructure vs. Airport network expansion investments.", type: "Debate" },
       { text: "Debate: Corporate capitalism sustainability vs. Alternatives like steady-state economies.", type: "Debate" },
-
-      // === DEFEND A BAD IDEA (20) ===
+      // === DEFEND A BAD IDEA ===
       { text: "Defend replacing traditional job interviews with week-long trials.", type: "Defend a Bad Idea" },
       { text: "Defend the idea that we should replace all tax laws with a national coin toss.", type: "Defend a Bad Idea" },
       { text: "Defend the idea that we should allocate university seats based on height.", type: "Defend a Bad Idea" },
@@ -951,8 +923,7 @@ export const enTopics = {
       { text: "Defend the idea that all corporate documents must be written in wingdings.", type: "Defend a Bad Idea" },
       { text: "Defend the idea that we should replace locks with a riddle-solving interface.", type: "Defend a Bad Idea" },
       { text: "Defend replacing alarms with a mechanism that tilts your bed.", type: "Defend a Bad Idea" },
-
-      // === CREATIVE SCENARIO (20) ===
+      // === CREATIVE SCENARIO ===
       { text: "You discover a device that lets you edit the memory of others. Describe the ethical framework you create.", type: "Creative Scenario" },
       { text: "You are the leader of a colony on Mars that has lost communication with Earth permanently.", type: "Creative Scenario" },
       { text: "You have been hired to design a system of governance for an online nation of 10 million people.", type: "Creative Scenario" },
@@ -973,8 +944,7 @@ export const enTopics = {
       { text: "You wake up to find that your house has moved to the bottom of the ocean overnight, protected by a bubble.", type: "Creative Scenario" },
       { text: "You are a detective solving a crime where the only clue is a single blue leaf. Describe the investigation.", type: "Creative Scenario" },
       { text: "You are asked to design a time capsule that will be opened in 10,000 years. What three items do you include?", type: "Creative Scenario" },
-
-      // === HOT TAKE (20) ===
+      // === HOT TAKE ===
       { text: "Hot Take: Algorithmic recommendations are a form of soft censorship that limits human choice.", type: "Hot Take" },
       { text: "Hot Take: Universal Basic Income will reduce human productivity by removing the necessity to work.", type: "Hot Take" },
       { text: "Hot Take: True privacy is impossible in a digital society, and we should stop trying to protect it.", type: "Hot Take" },
