@@ -1,4 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
+import speechlabPresentation from '../assets/speechlab-presentation.jpg';
+import speechlabGroup from '../assets/speechlab-group.jpg';
 
 export default function EventsPage() {
   return (
@@ -30,14 +32,42 @@ export default function EventsPage() {
           </div>
         </div>
 
-        {/* Wireframe Placeholder Frame matching Screenshot 1 */}
-        <div className="lovable-wireframe-card relative min-h-[360px] md:min-h-[440px] w-full rounded-md">
-          <svg className="absolute inset-0 w-full h-full text-gray-300" preserveAspectRatio="none">
-            <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" opacity="0.4" />
-            <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" opacity="0.4" />
-          </svg>
+        {/* Hero Photo Frame with real workshop presentation photo */}
+        <div className="relative min-h-[360px] md:min-h-[440px] w-full rounded-md overflow-hidden border border-gray-200 shadow-sm bg-gray-100">
+          <img 
+            src={speechlabPresentation} 
+            alt="SpeechLab presentation session" 
+            className="w-full h-full object-cover"
+          />
           <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded text-[11px] font-medium text-gray-700 shadow-sm border border-gray-200">
             SpeechLab photo / speaker mid-presentation
+          </div>
+        </div>
+      </section>
+
+      {/* EVENT PHOTOGRAPHY SECTION */}
+      <section className="border-t border-gray-200 pt-12 pb-16">
+        <span className="lovable-section-label mb-6 inline-block">THE COMMUNITY IN ACTION</span>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div className="md:col-span-7 relative min-h-[300px] md:min-h-[380px] rounded-md overflow-hidden border border-gray-200 shadow-sm bg-gray-100">
+            <img 
+              src={speechlabPresentation} 
+              alt="SpeechLab workshop presentation" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded text-[11px] font-medium text-gray-700 shadow-sm border border-gray-200">
+              Interactive speaking &amp; PowerPoint Karaoke
+            </div>
+          </div>
+          <div className="md:col-span-5 relative min-h-[300px] md:min-h-[380px] rounded-md overflow-hidden border border-gray-200 shadow-sm bg-gray-100">
+            <img 
+              src={speechlabGroup} 
+              alt="SpeechLab London Community" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded text-[11px] font-medium text-gray-700 shadow-sm border border-gray-200">
+              SpeechLab London Community
+            </div>
           </div>
         </div>
       </section>
