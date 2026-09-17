@@ -230,76 +230,6 @@ const MODE_TYPES: Record<'everyday' | 'work' | 'challenge', string[]> = {
   challenge: ['Mixed', 'Persuade', 'Debate', 'Defend a Bad Idea', 'Creative Scenario', 'Hot Take']
 };
 
-const COMMUNITY_LOGOS = [
-  { id: 'lbs', label: 'London Business School', type: 'text-serif', text: 'London Business School' },
-  { id: 'oxford', label: 'Oxford', type: 'text-serif-caps', text: 'Oxford' },
-  { id: 'cambridge', label: 'Cambridge', type: 'text-serif-caps', text: 'Cambridge' },
-  { id: 'lse', label: 'LSE', type: 'text-sans-bold', text: 'LSE' },
-  { id: 'ucl', label: 'UCL', type: 'text-sans-bold', text: 'UCL' },
-  { id: 'google', label: 'Google', type: 'svg-google' },
-  { id: 'meta', label: 'Meta', type: 'svg-meta' },
-  { id: 'mckinsey', label: 'McKinsey', type: 'text-serif', text: 'McKinsey & Company' },
-  { id: 'ef', label: 'Entrepreneur First', type: 'text-sans-caps', text: 'Entrepreneur First' },
-  { id: 'vc', label: 'VC-backed startups', type: 'badge', text: 'VC-backed startups' }
-];
-
-const renderCommunityLogo = (item: typeof COMMUNITY_LOGOS[0], keyIndex: number) => {
-  if (item.type === 'badge') {
-    return (
-      <div key={keyIndex} className="events-logo-item">
-        <span className="events-community-pill">{item.text}</span>
-      </div>
-    );
-  }
-  if (item.type === 'svg-google') {
-    return (
-      <div key={keyIndex} className="events-logo-item" title={item.label}>
-        <svg viewBox="0 0 74 24" height="19" fill="currentColor" aria-label="Google">
-          <path d="M9.24 10.74v2.79h6.46c-.26 1.7-1.95 4.97-6.46 4.97-3.89 0-7.07-3.22-7.07-7.2s3.18-7.2 7.07-7.2c2.22 0 3.7.95 4.54 1.77l2.21-2.13C14.57 2.37 12.14 1.5 9.24 1.5 3.96 1.5 0 5.53 0 11.3s3.96 9.8 9.24 9.8c5.52 0 9.18-3.88 9.18-9.35 0-.63-.07-1.11-.15-1.59H9.24zm16.5 1.52c-2.8 0-4.94 2.13-4.94 4.94s2.14 4.94 4.94 4.94 4.94-2.13 4.94-4.94-2.14-4.94-4.94-4.94zm0 7.41c-1.46 0-2.65-1.2-2.65-2.47s1.19-2.47 2.65-2.47 2.65 1.2 2.65 2.47-1.19 2.47-2.65 2.47zm11.53-7.41c-2.8 0-4.94 2.13-4.94 4.94s2.14 4.94 4.94 4.94 4.94-2.13 4.94-4.94-2.14-4.94-4.94-4.94zm0 7.41c-1.46 0-2.65-1.2-2.65-2.47s1.19-2.47 2.65-2.47 2.65 1.2 2.65 2.47-1.19 2.47-2.65 2.47zm11.45-7.14c-2.61 0-4.73 2.07-4.73 4.94 0 2.84 2.12 4.94 4.73 4.94 1.5 0 2.48-.62 3.03-1.27v1.07c0 1.9-1.02 2.92-2.65 2.92-1.33 0-2.16-.95-2.5-1.75l-2.01.83c.58 1.4 2.13 2.92 4.51 2.92 2.62 0 4.83-1.54 4.83-5.15V12.5h-2.16v.99c-.58-.66-1.55-1.23-3.05-1.23zm.25 7.14c-1.46 0-2.62-1.23-2.62-2.47 0-1.27 1.16-2.47 2.62-2.47 1.43 0 2.56 1.2 2.56 2.47 0 1.24-1.13 2.47-2.56 2.47zM53.77 2.5h-2.29v18.1h2.29V2.5zm7.74 9.76c-2.47 0-4.32 1.83-4.32 4.94 0 3.08 2.04 4.94 4.56 4.94 1.86 0 3.03-.9 3.65-1.83l-1.83-1.22c-.41.61-1.05 1.05-1.83 1.05-1.02 0-1.63-.48-2.01-1.24l6.07-2.52-.3-.72c-.43-1.17-1.77-3.4-4.01-3.4zm.12 2.16c.84 0 1.49.44 1.74 1.07l-3.95 1.64c0-1.8 1.25-2.71 2.21-2.71z" />
-        </svg>
-      </div>
-    );
-  }
-  if (item.type === 'svg-meta') {
-    return (
-      <div key={keyIndex} className="events-logo-item" title={item.label}>
-        <svg viewBox="0 0 88 18" height="17" fill="currentColor" aria-label="Meta">
-          <path d="M14.68 1.77C12.35 1.77 10.3 3.12 9.04 5.09 7.78 3.12 5.73 1.77 3.4 1.77.92 1.77-.5 3.84.14 6.78l1.45 6.64c.26 1.19 1.24 1.95 2.37 1.95 1.49 0 2.67-1.18 2.39-2.75l-.94-4.3c-.22-1.01.42-1.82 1.34-1.82.91 0 1.65.81 1.87 1.82l.94 4.3c.35 1.62 1.8 2.75 3.33 2.75 1.53 0 2.98-1.13 3.33-2.75l.94-4.3c.22-1.01.96-1.82 1.87-1.82.92 0 1.56.81 1.34 1.82l-.94 4.3c-.28 1.57.9 2.75 2.39 2.75 1.13 0 2.11-.76 2.37-1.95l1.45-6.64c.64-2.94-.78-5.01-3.26-5.01-2.33 0-4.38 1.35-5.64 3.32-1.26-1.97-3.31-3.32-5.64-3.32zm25.86 1.67h-4.37v11.66h4.37V3.44zm11.75 0h-8.23v11.66h8.23v-2.34h-5.46V9.89h4.84V7.55h-4.84V5.78h5.46V3.44zm8.68 2.34h-3.41V3.44h9.59v2.34h-3.41v9.32h-2.77V5.78zm16.71-2.34h-2.73l-4.52 11.66h2.81l.9-2.43h4.36l.9 2.43h2.81L77.68 3.44zm-.8 2.51l1.58 4.27h-3.16l1.58-4.27z" />
-        </svg>
-      </div>
-    );
-  }
-  if (item.type === 'text-serif') {
-    return (
-      <div key={keyIndex} className="events-logo-item" style={{ fontFamily: 'Georgia, serif', fontWeight: 600, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>
-        {item.text}
-      </div>
-    );
-  }
-  if (item.type === 'text-serif-caps') {
-    return (
-      <div key={keyIndex} className="events-logo-item" style={{ fontFamily: 'Georgia, serif', fontWeight: 600, fontSize: '0.88rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-        {item.text}
-      </div>
-    );
-  }
-  if (item.type === 'text-sans-bold') {
-    return (
-      <div key={keyIndex} className="events-logo-item" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: 800, fontSize: '1.05rem', letterSpacing: '0.08em' }}>
-        {item.text}
-      </div>
-    );
-  }
-  if (item.type === 'text-sans-caps') {
-    return (
-      <div key={keyIndex} className="events-logo-item" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-        {item.text}
-      </div>
-    );
-  }
-  return null;
-};
-
 export default function PracticePage() {
   const [lang, setLang] = useLocalStorage<LanguageCode>('selectedLanguage', 'en');
   const [storedMode, setMode] = useLocalStorage<ModeCode>('selectedMode', 'everyday');
@@ -641,47 +571,6 @@ export default function PracticePage() {
         </div>
       </div>
       </div>
-
-      {/* Live Events / Community Section */}
-      <section className="events-section">
-        <h2 className="events-title">
-          Ready to try it with real people?
-        </h2>
-        <p className="events-subtitle">
-          PowerPoint Karaoke, spontaneous speaking, quick-thinking challenges and a room full of people willing to give it a go.
-        </p>
-
-        {/* Community Social Proof Box */}
-        <div className="events-community-container">
-          <h3 className="events-community-subheading">
-            Who you'll find in the room
-          </h3>
-          <p className="events-community-note">
-            People in our community come from organisations and institutions like:
-          </p>
-
-          <div className="events-marquee-wrapper">
-            <div className="events-marquee-track">
-              {COMMUNITY_LOGOS.concat(COMMUNITY_LOGOS).map((item, idx) => renderCommunityLogo(item, idx))}
-            </div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="events-cta-container">
-          <a
-            href="https://luma.com/calendar/cal-oXV40hOhAgTjHHW"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="events-cta-btn"
-          >
-            See upcoming SpeechLab events &rarr;
-          </a>
-          <span className="events-supporting-line">
-            London sessions &middot; Founder workshops &middot; Community collaborations
-          </span>
-        </div>
-      </section>
 
       {/* Speech Insights Section */}
       <section className="insights-section">
