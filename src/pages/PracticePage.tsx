@@ -519,6 +519,13 @@ export default function PracticePage() {
                 {t.entrepreneurshipInstruction}
               </p>
             )}
+            <button 
+              className="text-sm font-semibold text-muted hover:text-main transition-colors"
+              style={{ marginTop: '-8px', marginBottom: '8px' }}
+              onClick={() => generateTopic(true)}
+            >
+              {t.tryDifferent}
+            </button>
           </>
         )}
         
@@ -549,14 +556,6 @@ export default function PracticePage() {
                   onClick={() => setShowLogger(true)}
                 >
                   {t.completeLog}
-                </button>
-              )}
-              {currentTopic !== '__EXHAUSTED__' && (
-                <button 
-                  className="text-sm font-semibold text-muted hover:text-main transition-colors"
-                  onClick={() => generateTopic(true)}
-                >
-                  {t.tryDifferent}
                 </button>
               )}
               

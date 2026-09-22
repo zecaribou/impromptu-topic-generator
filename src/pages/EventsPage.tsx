@@ -161,7 +161,7 @@ export default function EventsPage() {
               </p>
             </div>
             <a
-              href="mailto:hello@speechlab.uk?subject=SpeechLab%20Workshop%20Enquiry"
+              href="mailto:info@speechlab.uk?subject=SpeechLab%20Workshop%20Enquiry"
               className="ev-b2b-link"
             >
               Talk to us about a workshop

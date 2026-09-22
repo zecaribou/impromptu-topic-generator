@@ -9,6 +9,7 @@ interface TimerProps {
 const TIMER_LABELS: Record<LanguageCode, {
   prep: string;
   speak: string;
+  preset2: string;
   preset3: string;
   preset5: string;
   resetLabel: string;
@@ -18,6 +19,7 @@ const TIMER_LABELS: Record<LanguageCode, {
   en: {
     prep: "Preparation",
     speak: "Speaking",
+    preset2: "2m Preset",
     preset3: "3m Preset",
     preset5: "5m Preset",
     resetLabel: "Reset Timer",
@@ -27,6 +29,7 @@ const TIMER_LABELS: Record<LanguageCode, {
   cn: {
     prep: "准备时间",
     speak: "演讲时间",
+    preset2: "2分钟预设",
     preset3: "3分钟预设",
     preset5: "5分钟预设",
     resetLabel: "重置计时",
@@ -36,6 +39,7 @@ const TIMER_LABELS: Record<LanguageCode, {
   es: {
     prep: "Preparación",
     speak: "Discurso",
+    preset2: "Predet. 2m",
     preset3: "Predet. 3m",
     preset5: "Predet. 5m",
     resetLabel: "Reiniciar",
@@ -45,6 +49,7 @@ const TIMER_LABELS: Record<LanguageCode, {
   fr: {
     prep: "Préparation",
     speak: "Prise de parole",
+    preset2: "2 min prédéfini",
     preset3: "3 min prédéfini",
     preset5: "5 min prédéfini",
     resetLabel: "Réinitialiser",
@@ -244,6 +249,12 @@ export function Timer({ lang = 'en' }: TimerProps) {
         ) : (
           <div className="flex flex-col items-center gap-3">
             <div className="flex gap-2">
+              <button 
+                className={`timer-preset-btn ${speakDuration === 120 ? 'active' : ''}`}
+                onClick={() => setSpeakingPreset(120)}
+              >
+                {tl.preset2}
+              </button>
               <button 
                 className={`timer-preset-btn ${speakDuration === 180 ? 'active' : ''}`}
                 onClick={() => setSpeakingPreset(180)}
